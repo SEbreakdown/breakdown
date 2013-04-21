@@ -9,6 +9,7 @@ import com.vaadin.ui.VerticalLayout;
 
 /**
  * Main UI class
+ * TEST
  */
 @SuppressWarnings("serial")
 public class BreakdownUI extends UI {
