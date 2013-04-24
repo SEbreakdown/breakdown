@@ -7,6 +7,8 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import de.se.tinf11b3.breakdown.gui.Hauptmenue;
+
 /**
  * Main UI class
  */
@@ -17,7 +19,8 @@ public class BreakdownUI extends UI {
 	protected void init(VaadinRequest request) {
 		final VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
-		setContent(layout);
+//		setContent(layout);
+		setContent(new Hauptmenue()	);
 
 		Button button = new Button("Click Me");
 		button.addClickListener(new Button.ClickListener() {
