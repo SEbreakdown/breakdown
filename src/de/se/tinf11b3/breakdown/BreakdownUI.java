@@ -19,8 +19,10 @@ public class BreakdownUI extends UI {
 	protected void init(VaadinRequest request) {
 		final VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
-//		setContent(layout);
-		setContent(new Hauptmenue()	);
+		setContent(layout);
+//		setContent(new Hauptmenue()	);
+//		setContent(new Canvas());
+		layout.addComponent(new Canvas());
 
 		Button button = new Button("Click Me");
 		button.addClickListener(new Button.ClickListener() {
