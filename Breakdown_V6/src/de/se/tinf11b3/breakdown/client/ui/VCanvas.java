@@ -65,6 +65,9 @@ public class VCanvas extends Composite implements Paintable, Field,
 	public VCanvas() {
 		final Surface surface = new Surface(500, 500);
 		surface.fillBackground(KnownColor.CORNFLOWER_BLUE).setFillStyle(KnownColor.ALICE_BLUE);
+		
+		surface.setFillStyle(KnownColor.BLACK).fillShape(new ShapeBuilder().drawCircle(250, 400, 5).build());
+		
 		flowPanel.add(surface);
 
 		surface.addMouseMoveHandler(new MouseMoveHandler() {

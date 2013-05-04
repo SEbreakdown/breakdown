@@ -10,11 +10,10 @@ import com.google.gwt.user.client.ui.Widget;
 public class CanvasWidget extends Surface {
 
     public static final String CLASSNAME = "canvas";
+//    Surface surface = new Surface();
     
     public CanvasWidget() {
-    	clear();
-    	fillBackground(KnownColor.BROWN).setFillStyle(KnownColor.ALICE_BLUE);
-    	
+//    	fillBackground(KnownColor.BROWN).setFillStyle(KnownColor.ALICE_BLUE);
 //        xsetText("Canvas sets the text via CanvasConnector using CanvasState");
         setStyleName(CLASSNAME);
     }

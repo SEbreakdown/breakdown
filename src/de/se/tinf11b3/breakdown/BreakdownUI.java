@@ -1,5 +1,6 @@
 package de.se.tinf11b3.breakdown;
 
+import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -23,7 +24,8 @@ public class BreakdownUI extends UI {
 //		setContent(new Hauptmenue()	);
 //		setContent(new Canvas());
 		layout.addComponent(new Canvas());
-
+		
+		
 		Button button = new Button("Click Me");
 		button.addClickListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {

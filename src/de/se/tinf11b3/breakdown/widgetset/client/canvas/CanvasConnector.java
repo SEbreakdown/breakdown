@@ -50,11 +50,6 @@ public class CanvasConnector extends AbstractComponentConnector {
 
     @Override
     protected Widget createWidget() {
-//    	CanvasWidget surface = GWT.create(CanvasWidget.class); 
-//    	surface.clear();
-//		surface.fillBackground(KnownColor.CORNFLOWER_BLUE).setFillStyle(KnownColor.ALICE_BLUE);
-//		surface.setFillStyle(KnownColor.BLACK);
-//		surface.fillRectangle(10, 10, 20, 20);
     	return GWT.create(CanvasWidget.class);
     }
 
