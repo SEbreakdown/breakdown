@@ -18,7 +18,11 @@ package de.se.tinf11b3.breakdown.client.ui;
 
 import gwt.g2d.client.graphics.KnownColor;
 import gwt.g2d.client.graphics.Surface;
+import gwt.g2d.client.graphics.canvas.CanvasPattern;
+import gwt.g2d.client.graphics.shapes.Shape;
 import gwt.g2d.client.graphics.shapes.ShapeBuilder;
+import gwt.g2d.client.math.Rectangle;
+import gwt.g2d.client.math.Vector2;
 
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -65,29 +69,51 @@ public class VCanvas extends Composite implements Paintable, Field,
 	public VCanvas() {
 		final Surface surface = new Surface(500, 500);
 		surface.fillBackground(KnownColor.CORNFLOWER_BLUE).setFillStyle(KnownColor.ALICE_BLUE);
+
+		// surface.setFillStyle(KnownColor.BLACK).fillShape(new
+		// ShapeBuilder().drawCircle(250, 400, 5).build());
+
+		// Stift in Rot
+		// surface.setFillStyle(KnownColor.RED);
+		surface.setLineWidth(10);
+		surface.setStrokeStyle(KnownColor.RED);
+
+		// Let the show begin!
+//		ShapeBuilder sb = new ShapeBuilder();
+//		sb.drawLineSegment(new Vector2(200, 480), new Vector2(300, 480));
+//		Shape shape = sb.build();
+//		surface.strokeShape(shape);
+
 		
-		surface.setFillStyle(KnownColor.BLACK).fillShape(new ShapeBuilder().drawCircle(250, 400, 5).build());
+//		new Cycle zum Warten!
 		
 		flowPanel.add(surface);
 
 		surface.addMouseMoveHandler(new MouseMoveHandler() {
 			public void onMouseMove(MouseMoveEvent event) {
-				if(aktiviert) {
-					surface.setFillStyle(KnownColor.BLACK).fillShape(new ShapeBuilder().drawCircle(event.getX(), event.getY(), 10).build());
+
+				if(event.getX() <= 450 && event.getX() >= 50) {
+					surface.setFillStyle(KnownColor.CORNFLOWER_BLUE);
+					surface.fillShape(new ShapeBuilder().drawRect(new Rectangle(0, 460, 500, 100)).build());
+
+					// Let the show begin!
+					ShapeBuilder sb = new ShapeBuilder();
+					sb.drawLineSegment(new Vector2(event.getX() - 50, 480), new Vector2(event.getX() + 50, 480));
+					Shape shape = sb.build();
+					surface.setStrokeStyle(KnownColor.BLACK);
+					surface.strokeShape(shape);
 				}
+
 			}
 		});
 
 		surface.addMouseUpHandler(new MouseUpHandler() {
 			public void onMouseUp(MouseUpEvent event) {
-				aktiviert = false;
 			}
 		});
 
 		surface.addMouseDownHandler(new MouseDownHandler() {
 			public void onMouseDown(MouseDownEvent event) {
-				aktiviert = true;
-				surface.setFillStyle(KnownColor.BLACK).fillShape(new ShapeBuilder().drawCircle(event.getX(), event.getY(), 10).build());
 			}
 		});
 
@@ -95,7 +121,6 @@ public class VCanvas extends Composite implements Paintable, Field,
 		setStyleName(CLASSNAME);
 	}
 
-	
 	public void updateFromUIDL(final UIDL uidl, ApplicationConnection client) {
 		this.client = client;
 		id = uidl.getId();
@@ -114,7 +139,7 @@ public class VCanvas extends Composite implements Paintable, Field,
 	public void onBlur(BlurEvent event) {
 		synchronizeContentToServer();
 	}
-	
+
 	public void onChange(ChangeEvent event) {
 	}
 }
