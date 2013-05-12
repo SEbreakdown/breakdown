@@ -39,7 +39,9 @@ public class Hauptmenue extends CustomComponent {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		
-		
+		button_start.addStyleName("button-start");
+		button_start.setDebugId("button-start");
+
 		
 		button_start.addListener(new ClickListener() {
 			

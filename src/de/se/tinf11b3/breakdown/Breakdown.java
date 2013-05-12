@@ -29,6 +29,7 @@ public class Breakdown extends Application {
 
 		mainWindow.setContent(hauptmenue);
 		setMainWindow(mainWindow);
+		setTheme("breakdowntheme");
 	}
 
 }
