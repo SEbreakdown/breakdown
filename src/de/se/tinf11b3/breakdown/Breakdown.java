@@ -18,7 +18,7 @@ public class Breakdown extends Application {
 	public void init() {
 		System.out.println("Player joined");
 		Window mainWindow = new Window("Breakdown");
-		
+
 		mainWindow.addListener(new CloseListener() {
 
 			public void windowClose(CloseEvent e) {
