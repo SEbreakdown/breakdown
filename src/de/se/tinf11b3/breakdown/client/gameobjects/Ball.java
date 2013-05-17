@@ -1,6 +1,7 @@
 package de.se.tinf11b3.breakdown.client.gameobjects;
 
 import gwt.g2d.client.graphics.Color;
+import gwt.g2d.client.graphics.Surface;
 
 public class Ball extends Gameobject {
 
@@ -25,6 +26,12 @@ public class Ball extends Gameobject {
 
 	public void setRadius(int radius) {
 		this.radius = radius;
+	}
+
+	@Override
+	public void drawObject(Surface surface) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

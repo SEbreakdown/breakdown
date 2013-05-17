@@ -70,11 +70,9 @@ public class VCanvas extends Composite implements Paintable, Field,
 	protected String id;
 	protected ApplicationConnection client;
 	
-	
 	private final FlowPanel flowPanel = new FlowPanel();
-	
 	private final Surface surface = new Surface(500, 500);
-	private DirectShapeRenderer shapeRenderer = new DirectShapeRenderer(surface);
+	
 	
 //	private Particle p = new Particle(
 //			new Vector2(Random.nextInt(WIDTH), Random.nextInt(HEIGHT)),
@@ -92,14 +90,16 @@ public class VCanvas extends Composite implements Paintable, Field,
 	public static Color BACKGROUNDCOLOR = KnownColor.CORNFLOWER_BLUE;
 	
 	
-	private Spielsteuerung steuerung;
+	private Spielsteuerung steuerung = new Spielsteuerung(surface);
 	
 	
 	public VCanvas() {
 		
+//		surface.fillBackground(VCanvas.BACKGROUNDCOLOR).setFillStyle(KnownColor.ALICE_BLUE);
+		
 		//Init Steuerung
-		steuerung = new Spielsteuerung(surface);
-
+//		steuerung = new Spielsteuerung(surface);
+		
 		//Kugel
 		//	      surface.save()
 //	          .setFillStyle(KnownColor.RED);
@@ -116,8 +116,8 @@ public class VCanvas extends Composite implements Paintable, Field,
 
 		// Stift in Rot
 		// surface.setFillStyle(KnownColor.RED);
-		surface.setLineWidth(10);
-		surface.setStrokeStyle(KnownColor.RED);
+//		surface.setLineWidth(10);
+//		surface.setStrokeStyle(KnownColor.RED);
 
 		// Let the show begin!
 //		ShapeBuilder sb = new ShapeBuilder();

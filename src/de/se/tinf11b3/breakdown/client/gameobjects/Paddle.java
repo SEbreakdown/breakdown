@@ -12,7 +12,7 @@ import gwt.g2d.client.math.Vector2;
 
 public class Paddle extends Gameobject {
 
-	private Rectangle size;
+	private Vector2 size;
 
 	/**
 	 * Init with Values
@@ -21,12 +21,12 @@ public class Paddle extends Gameobject {
 	 * @param y
 	 * @param size
 	 */
-	public Paddle(int x, int y, Color color, Rectangle size) {
+	public Paddle(int x, int y, Color color, Vector2 size) {
 		super(x, y, color);
 		this.size = size;
 	}
 
-	public Rectangle getSize() {
+	public Vector2 getSize() {
 		return size;
 	}
 	
