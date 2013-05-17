@@ -52,6 +52,8 @@ import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.ui.Field;
 
+import de.se.tinf11b3.breakdown.client.steuerung.Spielsteuerung;
+
 /**
  * This class implements a basic client side rich text editor component.
  * 
@@ -67,42 +69,47 @@ public class VCanvas extends Composite implements Paintable, Field,
 	public static final String CLASSNAME = "v-richtextarea";
 	protected String id;
 	protected ApplicationConnection client;
+	
+	
 	private final FlowPanel flowPanel = new FlowPanel();
-	private boolean aktiviert = false;
+	
 	private final Surface surface = new Surface(500, 500);
 	private DirectShapeRenderer shapeRenderer = new DirectShapeRenderer(surface);
-	private Particle p = new Particle(
-			new Vector2(Random.nextInt(WIDTH), Random.nextInt(HEIGHT)),
-			new Vector2(Math.random(), Math.random()).normalize(),
-			new Color(Random.nextInt(256),
-					Random.nextInt(256),
-					Random.nextInt(256),
-					1.0));
-	private static int WIDTH = 500;
-	private static int HEIGHT = 500;
+	
+//	private Particle p = new Particle(
+//			new Vector2(Random.nextInt(WIDTH), Random.nextInt(HEIGHT)),
+//			new Vector2(Math.random(), Math.random()).normalize(),
+//			new Color(Random.nextInt(256),
+//					Random.nextInt(256),
+//					Random.nextInt(256),
+//					1.0));
 	
 	
-	private int mouseX;
-	private int mouseY;
+	
+	//Options
+	public static int WIDTH = 500;
+	public static int HEIGHT = 500;
+	public static Color BACKGROUNDCOLOR = KnownColor.CORNFLOWER_BLUE;
+	
+	
+	private Spielsteuerung steuerung;
 	
 	
 	public VCanvas() {
 		
-		surface.fillBackground(KnownColor.CORNFLOWER_BLUE).setFillStyle(KnownColor.ALICE_BLUE);
+		//Init Steuerung
+		steuerung = new Spielsteuerung(surface);
 
-		
-	    	surface.save()
-	          .setFillStyle(KnownColor.RED);
-	      shapeRenderer.beginPath()
-	              .moveTo(new Vector2(100, 100))
-	              .drawCircle(new Vector2(10, 10), 20)
-	              .closePath()
-	              .fill();              
-	      surface.restore();
-		
-		
-		
-		
+		//Kugel
+		//	      surface.save()
+//	          .setFillStyle(KnownColor.RED);
+//	      shapeRenderer.beginPath()
+//	              .moveTo(new Vector2(100, 100))
+//	              .drawCircle(new Vector2(10, 10), 20)
+//	              .closePath()
+//	              .fill();              
+//	      surface.restore();
+//		
 		
 		// surface.setFillStyle(KnownColor.BLACK).fillShape(new
 		// ShapeBuilder().drawCircle(250, 400, 5).build());
@@ -123,65 +130,7 @@ public class VCanvas extends Composite implements Paintable, Field,
 		
 		flowPanel.add(surface);
 
-		surface.addMouseMoveHandler(new MouseMoveHandler() {
-			public void onMouseMove(MouseMoveEvent event) {
-				mouseX = event.getX();
-				mouseY = event.getY();
-
-				if(event.getX() <= 450 && event.getX() >= 50) {
-					surface.setFillStyle(KnownColor.CORNFLOWER_BLUE);
-					surface.fillShape(new ShapeBuilder().drawRect(new Rectangle(0, 460, 500, 100)).build());
-
-					// Let the show begin!
-					ShapeBuilder sb = new ShapeBuilder();
-					sb.drawLineSegment(new Vector2(event.getX() - 50, 480), new Vector2(event.getX() + 50, 480));
-					Shape shape = sb.build();
-					surface.setStrokeStyle(KnownColor.BLACK);
-					surface.strokeShape(shape);
-					
-				}
-
-			}
-		});
-
-		surface.addMouseUpHandler(new MouseUpHandler() {
-			public void onMouseUp(MouseUpEvent event) {
-			}
-		});
-
-		surface.addMouseDownHandler(new MouseDownHandler() {
-			public void onMouseDown(MouseDownEvent event) {
-				
-//				for(int i=0; i<100; i++){
-//					update();
-//				}
-				
-				FpsTimer timer = new FpsTimer(100) {
-					
-					@Override
-					public void update() {
-						Vector2 pos = p.getPosition();
-					      Vector2 vel = p.getVelocity();
-					      if (pos.getX() < 0) {
-					        vel.setX(Math.abs(vel.getX()));
-					      } else if (pos.getX() >= WIDTH) {
-					        vel.setX(-Math.abs(vel.getX()));
-					      }
-					      if (pos.getY() < 0) {
-					        vel.setY(Math.abs(vel.getY()));
-					      } else if (pos.getY() >= HEIGHT) {
-					        vel.setY(-Math.abs(vel.getY()));
-					      }
-					      pos.mutableAdd(p.getVelocity());
-					    draw();
-					}
-				};
-				
-				timer.start();
-				
-			}
-		});
-
+		
 		initWidget(flowPanel);
 		setStyleName(CLASSNAME);
 	}
@@ -207,103 +156,6 @@ public class VCanvas extends Composite implements Paintable, Field,
 
 	public void onChange(ChangeEvent event) {
 	}
-	
-	
-	
-	
-	public void update() {
-	      Vector2 pos = p.getPosition();
-	      Vector2 vel = p.getVelocity();
-	      if (pos.getX() < 0) {
-	        vel.setX(Math.abs(vel.getX()));
-	      } else if (pos.getX() >= WIDTH) {
-	        vel.setX(-Math.abs(vel.getX()));
-	      }
-	      if (pos.getY() < 0) {
-	        vel.setY(Math.abs(vel.getY()));
-	      } else if (pos.getY() >= HEIGHT) {
-	        vel.setY(-Math.abs(vel.getY()));
-	      }
-	      pos.mutableAdd(p.getVelocity());
-	      
-	      draw();
-	      
-	      
-	      //DRAW PADDLE
-	      surface.setFillStyle(KnownColor.CORNFLOWER_BLUE);
-			surface.fillShape(new ShapeBuilder().drawRect(new Rectangle(0, 460, 500, 100)).build());
-
-			// Let the show begin!
-			ShapeBuilder sb = new ShapeBuilder();
-			sb.drawLineSegment(new Vector2(this.mouseX - 50, 480), new Vector2(this.mouseX + 50, 480));
-			Shape shape = sb.build();
-			surface.setStrokeStyle(KnownColor.BLACK);
-			surface.strokeShape(shape);
-	      
-	      
-	      
-	      
-	  }
-	  
-	  /**
-	   * Draws the particles.
-	   */
-	  private void draw() {
-		  surface.clear().fillBackground(KnownColor.CORNFLOWER_BLUE);
-		  surface.save()
-	          .setFillStyle(p.getColor());
-	      shapeRenderer.beginPath()
-	              .moveTo(p.getPosition())
-	              .drawCircle(p.getPosition(), 10)
-	              .closePath()
-	              .fill();              
-	      surface.restore();
-	  }
-	  
-	  /**
-	   * Simple particle class.
-	   * 
-	   * @author hao1300@gmail.com
-	   */
-	  private static class Particle {
-	    private final Vector2 position, velocity;
-	    private final Color color;
-	    
-	    public Particle(Vector2 position, Vector2 velocity, Color color) {
-	      this.position = position;
-	      this.velocity = velocity;
-	      this.color = color;
-	    }
-	    
-	    public final Color getColor() {
-	      return color;
-	    }
-	    
-	    public final Vector2 getPosition() {
-	      return position;
-	    }
-	    
-	    public final Vector2 getVelocity() {
-	      return velocity;
-	    }
-	
-	  }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }
