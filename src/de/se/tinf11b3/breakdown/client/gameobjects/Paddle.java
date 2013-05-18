@@ -12,7 +12,8 @@ import gwt.g2d.client.math.Vector2;
 
 public class Paddle extends Gameobject {
 
-	private Vector2 size;
+	private int size;
+	
 
 	/**
 	 * Init with Values
@@ -21,31 +22,48 @@ public class Paddle extends Gameobject {
 	 * @param y
 	 * @param size
 	 */
-	public Paddle(int x, int y, Color color, Vector2 size) {
-		super(x, y, color);
+	public Paddle(int x, int y, Color color, int size, Surface surface) {
+		super(x, y, color, surface);
 		this.size = size;
 	}
 
-	public Vector2 getSize() {
+	public int getSize() {
 		return size;
 	}
+
 	
-	@Override
-	public void drawObject(Surface surface) {
-		 
+
+	/**
+	 * Remove old Paddle
+	 * @param surface
+	 */
+	private void cleanCanvas() {
 		//Altes Paddle loeschen
 		surface.setFillStyle(VCanvas.BACKGROUNDCOLOR);
 		surface.setLineWidth(10);
-		surface.fillShape(new ShapeBuilder().drawRect(new Rectangle(0, 460, 500, 100)).build());
+		surface.fillShape(new ShapeBuilder().drawRect(new Rectangle(0, 450, 500, 100)).build());		
+	}
+
+	
+	@Override
+	public void drawObject() {
+	
+		//Remove old Graphics
+		cleanCanvas();
 		
-		// Shape zeichnen
+		// Paddle zeichnen
 		ShapeBuilder sb = new ShapeBuilder();
-			sb.drawLineSegment(new Vector2(x - 50, 480), new Vector2(x + 50, 480));
+			sb.drawLineSegment(new Vector2(x - (size/2), y), new Vector2(x + (size/2), y));
 		Shape shape = sb.build();
-		surface.setStrokeStyle(KnownColor.BLACK);
+		surface.setStrokeStyle(color);
 		surface.strokeShape(shape);
+		
 		
 	}
 	
 
+	
+	
+	
+	
 }

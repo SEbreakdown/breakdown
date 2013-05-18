@@ -9,17 +9,19 @@ public abstract class Gameobject {
 	protected int x;
 	protected int y;
 	protected Color color;
-
+	protected Surface surface;
+	
 	/**
 	 * Init a Gameobject with given Values
 	 * @param x
 	 * @param y
 	 * @param color
 	 */
-	public Gameobject(int x, int y, Color color) {
+	public Gameobject(int x, int y, Color color, Surface surface) {
 		this.x = x;
 		this.y = y;
 		this.color = color;
+		this.surface = surface;
 	}
 
 	public int getX() {
@@ -46,8 +48,13 @@ public abstract class Gameobject {
 		this.color = color;
 	}
 	
-	public abstract void drawObject(Surface surface);
+	public abstract void drawObject();
 	
+	
+	public void setPosition(int x, int y) {
+		setX(x);
+		setY(y);
+	}
 	
 	
 }

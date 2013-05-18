@@ -3,6 +3,8 @@ package de.se.tinf11b3.breakdown.client.gameobjects;
 
 import gwt.g2d.client.graphics.Color;
 import gwt.g2d.client.graphics.Surface;
+import gwt.g2d.client.graphics.shapes.Shape;
+import gwt.g2d.client.graphics.shapes.ShapeBuilder;
 import gwt.g2d.client.math.Vector2;
 
 public class Block extends Gameobject {
@@ -17,8 +19,8 @@ public class Block extends Gameobject {
 	 * @param color
 	 * @param size
 	 */
-	public Block(int x, int y, Color color, Vector2 size) {
-		super(x, y, color);
+	public Block(int x, int y, Color color, Vector2 size, Surface surface) {
+		super(x, y, color, surface);
 		this.size = size;
 	}
 
@@ -31,9 +33,13 @@ public class Block extends Gameobject {
 	}
 
 	@Override
-	public void drawObject(Surface surface) {
-		// TODO Auto-generated method stub
-		
+	public void drawObject() {
+		// Block zeichnen
+		ShapeBuilder sb = new ShapeBuilder();
+			sb.drawRect(x, y, size.getX(), size.getY());
+		Shape shape = sb.build();
+		surface.setFillStyle(color);
+		surface.fillShape(shape);		
 	}
 
 }

@@ -69,68 +69,24 @@ public class VCanvas extends Composite implements Paintable, Field,
 	public static final String CLASSNAME = "v-richtextarea";
 	protected String id;
 	protected ApplicationConnection client;
-	
+
 	private final FlowPanel flowPanel = new FlowPanel();
-	private final Surface surface = new Surface(500, 500);
-	
-	
-//	private Particle p = new Particle(
-//			new Vector2(Random.nextInt(WIDTH), Random.nextInt(HEIGHT)),
-//			new Vector2(Math.random(), Math.random()).normalize(),
-//			new Color(Random.nextInt(256),
-//					Random.nextInt(256),
-//					Random.nextInt(256),
-//					1.0));
-	
-	
-	
-	//Options
+
+	// Options
 	public static int WIDTH = 500;
 	public static int HEIGHT = 500;
 	public static Color BACKGROUNDCOLOR = KnownColor.CORNFLOWER_BLUE;
-	
-	
+
+	// Init Canvas
+	private final Surface surface = new Surface(500, 500);
+
+	// Init Steuerung
 	private Spielsteuerung steuerung = new Spielsteuerung(surface);
-	
-	
+
 	public VCanvas() {
-		
-//		surface.fillBackground(VCanvas.BACKGROUNDCOLOR).setFillStyle(KnownColor.ALICE_BLUE);
-		
-		//Init Steuerung
-//		steuerung = new Spielsteuerung(surface);
-		
-		//Kugel
-		//	      surface.save()
-//	          .setFillStyle(KnownColor.RED);
-//	      shapeRenderer.beginPath()
-//	              .moveTo(new Vector2(100, 100))
-//	              .drawCircle(new Vector2(10, 10), 20)
-//	              .closePath()
-//	              .fill();              
-//	      surface.restore();
-//		
-		
-		// surface.setFillStyle(KnownColor.BLACK).fillShape(new
-		// ShapeBuilder().drawCircle(250, 400, 5).build());
 
-		// Stift in Rot
-		// surface.setFillStyle(KnownColor.RED);
-//		surface.setLineWidth(10);
-//		surface.setStrokeStyle(KnownColor.RED);
-
-		// Let the show begin!
-//		ShapeBuilder sb = new ShapeBuilder();
-//		sb.drawLineSegment(new Vector2(200, 480), new Vector2(300, 480));
-//		Shape shape = sb.build();
-//		surface.strokeShape(shape);
-
-		
-//		new Cycle zum Warten!
-		
 		flowPanel.add(surface);
 
-		
 		initWidget(flowPanel);
 		setStyleName(CLASSNAME);
 	}
@@ -156,6 +112,39 @@ public class VCanvas extends Composite implements Paintable, Field,
 
 	public void onChange(ChangeEvent event) {
 	}
-	
-	
+
+	// Kugel
+	// surface.save()
+	// .setFillStyle(KnownColor.RED);
+	// shapeRenderer.beginPath()
+	// .moveTo(new Vector2(100, 100))
+	// .drawCircle(new Vector2(10, 10), 20)
+	// .closePath()
+	// .fill();
+	// surface.restore();
+	//
+
+	// surface.setFillStyle(KnownColor.BLACK).fillShape(new
+	// ShapeBuilder().drawCircle(250, 400, 5).build());
+
+	// Stift in Rot
+	// surface.setFillStyle(KnownColor.RED);
+	// surface.setLineWidth(10);
+	// surface.setStrokeStyle(KnownColor.RED);
+
+	// Let the show begin!
+	// ShapeBuilder sb = new ShapeBuilder();
+	// sb.drawLineSegment(new Vector2(200, 480), new Vector2(300, 480));
+	// Shape shape = sb.build();
+	// surface.strokeShape(shape);
+
+	// new Cycle zum Warten!
+
+	// private Particle p = new Particle(
+	// new Vector2(Random.nextInt(WIDTH), Random.nextInt(HEIGHT)),
+	// new Vector2(Math.random(), Math.random()).normalize(),
+	// new Color(Random.nextInt(256),
+	// Random.nextInt(256),
+	// Random.nextInt(256),
+	// 1.0));
 }
