@@ -17,39 +17,18 @@
 package de.se.tinf11b3.breakdown.client.ui;
 
 import gwt.g2d.client.graphics.Color;
-import gwt.g2d.client.graphics.DirectShapeRenderer;
 import gwt.g2d.client.graphics.KnownColor;
 import gwt.g2d.client.graphics.Surface;
-import gwt.g2d.client.graphics.canvas.CanvasPattern;
-import gwt.g2d.client.graphics.shapes.Shape;
-import gwt.g2d.client.graphics.shapes.ShapeBuilder;
-import gwt.g2d.client.math.Rectangle;
-import gwt.g2d.client.math.Vector2;
-import gwt.g2d.client.util.FpsTimer;
 
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseUpEvent;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.UIDL;
-import com.vaadin.terminal.gwt.client.Util;
 import com.vaadin.terminal.gwt.client.ui.Field;
 
 import de.se.tinf11b3.breakdown.client.steuerung.Spielsteuerung;

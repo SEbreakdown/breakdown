@@ -6,19 +6,13 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.user.client.Random;
 
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
 import de.se.tinf11b3.breakdown.client.ui.VCanvas;
-import gwt.g2d.client.graphics.Color;
-import gwt.g2d.client.graphics.DirectShapeRenderer;
 import gwt.g2d.client.graphics.KnownColor;
 import gwt.g2d.client.graphics.Surface;
-import gwt.g2d.client.graphics.shapes.Shape;
-import gwt.g2d.client.graphics.shapes.ShapeBuilder;
-import gwt.g2d.client.math.Rectangle;
 import gwt.g2d.client.math.Vector2;
 import gwt.g2d.client.util.FpsTimer;
 
@@ -30,7 +24,9 @@ public class Spielsteuerung {
 	private boolean gameStarted = false;
 	private Paddle paddle;
 	private Ball ball;
-	boolean hoch=true;
+	boolean hoch = true;
+	Block bloecke[] = new Block[15];
+
 	// private Particle p = new Particle(
 	// new Vector2(Random.nextInt(VCanvas.WIDTH),
 	// Random.nextInt(VCanvas.HEIGHT)),
@@ -47,14 +43,15 @@ public class Spielsteuerung {
 
 		// Init Paddle
 		paddle = new Paddle(250, 480, KnownColor.BLACK, 100, surface);
-		paddle.drawObject();
 
 		// Init Ball
 		ball = new Ball(250, 465, KnownColor.GREEN, 10, surface);
-		ball.drawObject();
 
-		// Init Level
+		// Init Blocks
 		initLevel(surface);
+		
+		// Draw them all
+		drawAllObjects();
 
 		// Move Paddle along the Canvas
 		surface.addMouseMoveHandler(new MouseMoveHandler() {
@@ -64,12 +61,12 @@ public class Spielsteuerung {
 				// Innerhalb des Canvas
 				if(event.getX() <= 450 && event.getX() >= 50) {
 					paddle.setX(mouseX);
-					paddle.drawObject();
 
 					if(gameStarted == false) {
 						ball.setX(mouseX);
 						ball.drawObject();
 					}
+					drawAllObjects();
 				}
 
 			}
@@ -83,37 +80,61 @@ public class Spielsteuerung {
 		surface.addMouseDownHandler(new MouseDownHandler() {
 			public void onMouseDown(MouseDownEvent event) {
 
-				gameStarted = true;
-				
-				FpsTimer timer = new FpsTimer(25) {
-					@Override
-					public void update() {
-						
-						
-						if(ball.getY() <= 15){
-							hoch = false;
-						}
-						if(ball.getY() >= 475){
-							hoch = true;
-						}
-						
-						if(hoch){
-							ball.setY(ball.getY()-5);
-							ball.drawObject();
-						}
-						else{
-							ball.cleanCanvas();
-							ball.setY(ball.getY()+5);
-							ball.drawObject();
-						}
-					}
-				};
+				if(gameStarted == false) {
 
-				timer.start();
+					gameStarted = true;
+
+					FpsTimer timer = new FpsTimer(50) {
+						@Override
+						public void update() {
+
+							if(ball.getY() <= 15) {
+								hoch = false;
+							}
+							if(ball.getY() >= 475) {
+								hoch = true;
+							}
+
+							if(hoch) {
+								ball.setY(ball.getY() - 5);
+								ball.drawObject();
+							}
+							else {
+								ball.setY(ball.getY() + 5);
+								ball.drawObject();
+							}
+
+							drawAllObjects();
+						}
+
+					};
+
+					timer.start();
+				}
 
 			}
 		});
 
+	}
+	
+	
+	
+	
+	private void drawAllObjects() {
+		surface.clear().fillBackground(KnownColor.CORNFLOWER_BLUE);
+		ball.drawObject();
+		drawBlocks();
+		paddle.drawObject();
+	}
+	
+	
+	
+	
+
+	private void drawBlocks() {
+		for(Block tmp : bloecke) {
+			tmp.drawObject();
+		}
 	}
 
 	/**
@@ -122,8 +143,6 @@ public class Spielsteuerung {
 	 * @param surface
 	 */
 	private void initLevel(Surface surface) {
-
-		Block bloecke[] = new Block[15];
 
 		int x = 30;
 		int y = 10;
