@@ -30,7 +30,7 @@ public class Spielsteuerung {
 	private boolean gameStarted = false;
 	private Paddle paddle;
 	private Ball ball;
-
+	boolean hoch=true;
 	// private Particle p = new Particle(
 	// new Vector2(Random.nextInt(VCanvas.WIDTH),
 	// Random.nextInt(VCanvas.HEIGHT)),
@@ -89,18 +89,15 @@ public class Spielsteuerung {
 					@Override
 					public void update() {
 						
-						//TODO Physik
-						boolean hoch=true;
 						
-						if(ball.getY() == 15){
+						if(ball.getY() <= 15){
 							hoch = false;
 						}
-						if(ball.getY() == 475){
+						if(ball.getY() >= 475){
 							hoch = true;
 						}
 						
 						if(hoch){
-							ball.cleanCanvas();
 							ball.setY(ball.getY()-5);
 							ball.drawObject();
 						}
