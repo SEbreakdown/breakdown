@@ -24,8 +24,9 @@ public class Spielsteuerung {
 	private boolean gameStarted = false;
 	private Paddle paddle;
 	private Ball ball;
-	boolean hoch = true;
-	Block bloecke[] = new Block[15];
+	private boolean hoch = true;
+	private Block bloecke[] = new Block[15];
+	private int x_direction = 5, y_direction = -5;
 
 	// private Particle p = new Particle(
 	// new Vector2(Random.nextInt(VCanvas.WIDTH),
@@ -49,7 +50,7 @@ public class Spielsteuerung {
 
 		// Init Blocks
 		initLevel(surface);
-		
+
 		// Draw them all
 		drawAllObjects();
 
@@ -88,21 +89,11 @@ public class Spielsteuerung {
 						@Override
 						public void update() {
 
-							if(ball.getY() <= 15) {
-								hoch = false;
-							}
-							if(ball.getY() >= 475) {
-								hoch = true;
-							}
+							set_Y_direction();
+							ball.setY(ball.getY() + y_direction);
 
-							if(hoch) {
-								ball.setY(ball.getY() - 5);
-								ball.drawObject();
-							}
-							else {
-								ball.setY(ball.getY() + 5);
-								ball.drawObject();
-							}
+							set_X_direction();
+							ball.setX(ball.getX() + x_direction);
 
 							drawAllObjects();
 						}
@@ -116,20 +107,34 @@ public class Spielsteuerung {
 		});
 
 	}
-	
-	
-	
-	
+
+	private void set_Y_direction() {
+
+		// Check Y-Rand Collision
+		if(ball.getY() <= 15) {
+			y_direction = +5;
+		}
+		else if(ball.getY() >= 475) {
+			y_direction = -5;
+		}
+	}
+
+	private void set_X_direction() {
+		// Check X-Rand Collision
+		if(ball.getX() <= 0) {
+			x_direction = +5;
+		}
+		else if(ball.getX() >= 495) {
+			x_direction = -5;
+		}
+	}
+
 	private void drawAllObjects() {
 		surface.clear().fillBackground(KnownColor.CORNFLOWER_BLUE);
 		ball.drawObject();
 		drawBlocks();
 		paddle.drawObject();
 	}
-	
-	
-	
-	
 
 	private void drawBlocks() {
 		for(Block tmp : bloecke) {
