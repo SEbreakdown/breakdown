@@ -1,5 +1,7 @@
 package de.se.tinf11b3.breakdown.client.steuerung;
 
+import java.util.ArrayList;
+
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
@@ -13,6 +15,8 @@ import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
 import de.se.tinf11b3.breakdown.client.ui.VCanvas;
 import gwt.g2d.client.graphics.KnownColor;
 import gwt.g2d.client.graphics.Surface;
+import gwt.g2d.client.math.Circle;
+import gwt.g2d.client.math.Rectangle;
 import gwt.g2d.client.math.Vector2;
 import gwt.g2d.client.util.FpsTimer;
 
@@ -24,8 +28,8 @@ public class Spielsteuerung {
 	private boolean gameStarted = false;
 	private Paddle paddle;
 	private Ball ball;
-	private boolean hoch = true;
-	private Block bloecke[] = new Block[15];
+	// private Block bloecke[] = new Block[15];
+	private ArrayList<Block> bloecke = new ArrayList<Block>();
 	private int x_direction = 5, y_direction = -5;
 
 	// private Particle p = new Particle(
@@ -85,14 +89,13 @@ public class Spielsteuerung {
 
 					gameStarted = true;
 
-					FpsTimer timer = new FpsTimer(50) {
+					FpsTimer timer = new FpsTimer(10) {
 						@Override
 						public void update() {
 
-							set_Y_direction();
-							ball.setY(ball.getY() + y_direction);
+							checkCollision();
 
-							set_X_direction();
+							ball.setY(ball.getY() + y_direction);
 							ball.setX(ball.getX() + x_direction);
 
 							drawAllObjects();
@@ -108,24 +111,89 @@ public class Spielsteuerung {
 
 	}
 
-	private void set_Y_direction() {
+	private void checkCollision() {
+		checkFrameCollision();
+		checkPaddleCollision();
+		checkBlockCollision();
+	}
 
-		// Check Y-Rand Collision
-		if(ball.getY() <= 15) {
-			y_direction = +5;
-		}
-		else if(ball.getY() >= 475) {
-			y_direction = -5;
+	private void checkBlockCollision() {
+		for(int i = 0; i < bloecke.size(); i++) {
+			Block tmp = bloecke.get(i);
+			Vector2 position = new Vector2(tmp.getX(), tmp.getY());
+			double width = tmp.getSize().getX();
+			double height = tmp.getSize().getY();
+
+			Rectangle rec = new Rectangle(position, width, height);
+			boolean hit = checkIntersection(rec, new Circle(ball.getX(), ball.getY(), ball.getRadius()));
+			// boolean hit = checkIntersection(new Rectangle(tmp.getX(),
+			// tmp.getY(), tmp.getSize().getX(), tmp.getSize().getY()), new
+			// Circle(ball.getX(), ball.getY(), ball.getRadius()));
+			if(hit) {
+				bloecke.remove(tmp);
+			}
 		}
 	}
 
-	private void set_X_direction() {
-		// Check X-Rand Collision
-		if(ball.getX() <= 0) {
-			x_direction = +5;
+	/**
+	 * http://mathworld.wolfram.com/Circle-LineIntersection.html
+	 * 
+	 * @param rectangle
+	 * @param circle
+	 * @return
+	 */
+	private boolean checkIntersection(Rectangle rectangle, Circle circle) {
+
+		double x = rectangle.getX() - circle.getCenterX();
+		double y = rectangle.getY() - circle.getCenterY();
+		double h = rectangle.getHeight();
+		double w = rectangle.getWidth();
+
+		Vector2 p1 = new Vector2(x, y);
+		Vector2 p2 = new Vector2(x + w, y);
+		Vector2 p3 = new Vector2(x + w, y + h);
+		Vector2 p4 = new Vector2(x, y + h);
+
+		boolean s1 = checkIntersection(p1, p2, circle);
+		boolean s2 = checkIntersection(p2, p3, circle);
+		boolean s3 = checkIntersection(p4, p3, circle);
+		boolean s4 = checkIntersection(p1, p4, circle);
+
+		return(s1 || s2 || s3 || s4);
+	}
+
+	private boolean checkIntersection(Vector2 p1, Vector2 p2, Circle circle) {
+		double dx = p2.getX() - p1.getX();
+		double dy = p2.getY() - p1.getY();
+
+		double dr = Math.sqrt(dx * dx + dy * dy);
+		double det = p1.getX() * p2.getY() - p2.getX() * p1.getY();
+
+		double delta = (circle.getRadius() * circle.getRadius()) * (dr * dr)
+				- (det * det);
+
+		if(delta >= 0) {
+			return true;
 		}
-		else if(ball.getX() >= 495) {
-			x_direction = -5;
+		else {
+			return false;
+		}
+	}
+
+	private void checkPaddleCollision() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void checkFrameCollision() {
+		// Check Y-Rand Collision
+		if((ball.getY() <= 15) || (ball.getY() >= 475)) {
+			y_direction *= -1;
+		}
+
+		// Check X-Rand Collision
+		if((ball.getX() <= 0) || (ball.getX() >= 495)) {
+			x_direction *= -1;
 		}
 	}
 
@@ -153,8 +221,7 @@ public class Spielsteuerung {
 		int y = 10;
 
 		for(int i = 0; i < 15; i++) {
-			bloecke[i] = new Block(x, y, KnownColor.RED, new Vector2(80, 30), surface);
-			bloecke[i].drawObject();
+			bloecke.add(new Block(x, y, KnownColor.RED, new Vector2(80, 30), surface));
 			x += 90;
 			if((i + 1) % 5 == 0) {
 				y += 50;
