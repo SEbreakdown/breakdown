@@ -60,15 +60,21 @@ public class VCanvas extends Composite implements Paintable, Field,
 	private final Surface surface = new Surface(500, 500);
 
 	// Init Steuerung
-	private Spielsteuerung steuerung = new Spielsteuerung(surface);
+	private Spielsteuerung steuerung = new Spielsteuerung(surface, this);
 
 	public VCanvas() {
 
 		flowPanel.add(surface);
-
+		
 		initWidget(flowPanel);
 		setStyleName(CLASSNAME);
 	}
+	
+	
+	public void pushToServer(String message) {
+		if(client != null) client.updateVariable(id, "debug", message, true);
+	}
+	
 
 	public void updateFromUIDL(final UIDL uidl, ApplicationConnection client) {
 		this.client = client;

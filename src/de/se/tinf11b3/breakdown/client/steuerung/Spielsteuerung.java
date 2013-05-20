@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseUpHandler;
 
+import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
@@ -31,7 +32,7 @@ public class Spielsteuerung {
 	// private Block bloecke[] = new Block[15];
 	private ArrayList<Block> bloecke = new ArrayList<Block>();
 	private int x_direction = 5, y_direction = -5;
-
+	private VCanvas app;
 	// private Particle p = new Particle(
 	// new Vector2(Random.nextInt(VCanvas.WIDTH),
 	// Random.nextInt(VCanvas.HEIGHT)),
@@ -41,8 +42,9 @@ public class Spielsteuerung {
 	// Random.nextInt(256),
 	// 1.0));
 
-	public Spielsteuerung(final Surface surface) {
+	public Spielsteuerung(final Surface surface, final VCanvas app) {
 		this.surface = surface;
+		this.app = app;
 
 		surface.fillBackground(VCanvas.BACKGROUNDCOLOR);
 
@@ -84,12 +86,13 @@ public class Spielsteuerung {
 
 		surface.addMouseDownHandler(new MouseDownHandler() {
 			public void onMouseDown(MouseDownEvent event) {
-
+				app.pushToServer("Hello, this is Client :P");
+				
 				if(gameStarted == false) {
 
 					gameStarted = true;
 
-					FpsTimer timer = new FpsTimer(10) {
+					FpsTimer timer = new FpsTimer(60) {
 						@Override
 						public void update() {
 
@@ -118,22 +121,177 @@ public class Spielsteuerung {
 	}
 
 	private void checkBlockCollision() {
-		for(int i = 0; i < bloecke.size(); i++) {
-			Block tmp = bloecke.get(i);
-			Vector2 position = new Vector2(tmp.getX(), tmp.getY());
-			double width = tmp.getSize().getX();
-			double height = tmp.getSize().getY();
+//		for(int i = 0; i < bloecke.size(); i++) {
+//			Block tmp = bloecke.get(i);
+//			Vector2 position = new Vector2(tmp.getX(), tmp.getY());
+//			double width = tmp.getSize().getX();
+//			double height = tmp.getSize().getY();
+//
+//			Rectangle rec = new Rectangle(position, width, height);
+////			boolean hit = checkIntersection(rec, new Circle(ball.getX(), ball.getY(), ball.getRadius()));
+//			Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
+//			boolean hit = RectangleCircleKollision(rec, circ).isCollided();
+//			
+//			
+//			if(hit) {
+//				bloecke.remove(tmp);
+//			}
+//		}
+		
+		Vector2 position = new Vector2(bloecke.get(13).getX(), bloecke.get(13).getY());
+		double width = bloecke.get(13).getSize().getX();
+		double height = bloecke.get(13).getSize().getY();
 
-			Rectangle rec = new Rectangle(position, width, height);
-			boolean hit = checkIntersection(rec, new Circle(ball.getX(), ball.getY(), ball.getRadius()));
-			// boolean hit = checkIntersection(new Rectangle(tmp.getX(),
-			// tmp.getY(), tmp.getSize().getX(), tmp.getSize().getY()), new
-			// Circle(ball.getX(), ball.getY(), ball.getRadius()));
-			if(hit) {
-				bloecke.remove(tmp);
-			}
+//		app.pushToServer("x="+String.valueOf(position.getX()));
+//		app.pushToServer("y="+String.valueOf(position.getY()));
+//		app.pushToServer("w="+String.valueOf(width));
+//		app.pushToServer("h="+String.valueOf(height));
+		
+		Rectangle rec = new Rectangle(position, width, height);
+		Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
+		app.pushToServer("x="+String.valueOf(circ.getCenterX()));
+		app.pushToServer("y="+String.valueOf(circ.getCenterY()));
+		app.pushToServer("r="+String.valueOf(circ.getRadius()));
+		boolean hit = RectangleCircleKollision(rec, circ).isCollided();
+		
+		
+		if(hit) {
+			bloecke.remove(13);
 		}
+		
 	}
+	
+	
+	/**
+	 * Skalarprodukt
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	private double dot(Vector2 a, Vector2 b) {
+		return a.getX()*b.getX()+a.getY()*b.getY();
+	}
+	
+	/**
+	 * Laenge des Vektors im Quadrat (spart Wurzelrechnung ein)
+	 * 
+	 * @param a
+	 * @return
+	 */
+	private double sqr_length(Vector2 a){
+		return dot(a,a);
+	}
+	
+	/**
+	 * Vektor mal Skalar
+	 * @param a
+	 * @param t
+	 * @return
+	 */
+	private Vector2 vec_mal_scalar(Vector2 a, double t){
+		return new Vector2(a.getX()*t, a.getY()*t);
+	}
+	
+	private Vector2 vec_plus_vec(Vector2 a, Vector2 b){
+		return new Vector2(a.getX()+b.getX(), a.getY()+b.getY());
+	}
+	private Vector2 vec_minus_vec(Vector2 a, Vector2 b){
+		return new Vector2(a.getX()-b.getX(), a.getY()-b.getY());
+	}
+	
+	//TODO CODE UMSCHREIBEN
+	
+	Vector2 PointLineDist(Vector2 point, Vector2 linestart, Vector2 lineend)
+	{
+	      Vector2 a = new Vector2(lineend.getX() - linestart.getX(), lineend.getY()-linestart.getY());
+	      Vector2 b = new Vector2(point.getX() - linestart.getX(), point.getY()-linestart.getY());
+	      double t = dot(a, b)/(sqr_length(a));
+	      
+	      if (t < 0) t = 0;
+	      if (t > 1) t = 1;
+	      return vec_plus_vec(linestart, vec_mal_scalar(a,t));
+	}
+	 
+	 
+	// Gibt zurück, ob eine Kollision stattfand und wenn ja, wo, und wie lang der (minimale, quadratische) Abstand zum Rechteck ist.
+	CollisionResult RectangleCircleKollision(Rectangle rect, Circle circle)
+	{
+		double x = rect.getX() - circle.getCenterX();
+		double y = rect.getY() - circle.getCenterY();
+		double h = rect.getHeight();
+		double w = rect.getWidth();
+
+		Vector2 p1 = new Vector2(x, y);
+		Vector2 p2 = new Vector2(x + w, y);
+		Vector2 p3 = new Vector2(x + w, y + h);
+		Vector2 p4 = new Vector2(x, y + h);
+		
+		
+	      double minDistSq = 8000;
+	      Vector2 basePoint = new Vector2(0,0);
+	      
+	      // Seiten durchgehen, Schleife kann (bzw muss, je nachdem wie Rect aussieht) entrollt werden
+	      Vector2 base = PointLineDist(circle.getCenter(), p1, p2);
+	      if(sqr_length(vec_minus_vec(circle.getCenter(), base))<minDistSq)
+	      {
+	            // Kürzerer Abstand, neu zuweisen.
+	             minDistSq = sqr_length(vec_minus_vec(circle.getCenter(),base));
+	             basePoint = base;
+	      }
+	      
+	      base = PointLineDist(circle.getCenter(), p2, p3);
+	      if(sqr_length(vec_minus_vec(circle.getCenter(), base))<minDistSq)
+	      {
+	            // Kürzerer Abstand, neu zuweisen.
+	             minDistSq = sqr_length(vec_minus_vec(circle.getCenter(),base));
+	             basePoint = base;
+	      }
+	      
+	      base = PointLineDist(circle.getCenter(), p3, p4);
+	      if(sqr_length(vec_minus_vec(circle.getCenter(), base))<minDistSq)
+	      {
+	            // Kürzerer Abstand, neu zuweisen.
+	             minDistSq = sqr_length(vec_minus_vec(circle.getCenter(),base));
+	             basePoint = base;
+	      }
+	      base = PointLineDist(circle.getCenter(), p4, p1);
+	      if(sqr_length(vec_minus_vec(circle.getCenter(), base))<minDistSq)
+	      {
+	            // Kürzerer Abstand, neu zuweisen.
+	             minDistSq = sqr_length(vec_minus_vec(circle.getCenter(),base));
+	             basePoint = base;
+	      }
+	      
+	      CollisionResult result = new CollisionResult(minDistSq < circle.getRadius() * circle.getRadius(), basePoint, minDistSq);
+	      
+	      return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 
 	/**
 	 * http://mathworld.wolfram.com/Circle-LineIntersection.html
