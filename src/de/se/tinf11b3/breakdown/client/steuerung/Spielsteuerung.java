@@ -14,8 +14,11 @@ import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
 import de.se.tinf11b3.breakdown.client.ui.VCanvas;
+import gwt.g2d.client.graphics.DirectShapeRenderer;
 import gwt.g2d.client.graphics.KnownColor;
 import gwt.g2d.client.graphics.Surface;
+import gwt.g2d.client.graphics.shapes.Shape;
+import gwt.g2d.client.graphics.shapes.ShapeBuilder;
 import gwt.g2d.client.math.Circle;
 import gwt.g2d.client.math.Rectangle;
 import gwt.g2d.client.math.Vector2;
@@ -64,6 +67,7 @@ public class Spielsteuerung {
 		surface.addMouseMoveHandler(new MouseMoveHandler() {
 			public void onMouseMove(MouseMoveEvent event) {
 				int mouseX = event.getX();
+			
 
 				// Innerhalb des Canvas
 				if(event.getX() <= 450 && event.getX() >= 50) {
@@ -121,43 +125,43 @@ public class Spielsteuerung {
 	}
 
 	private void checkBlockCollision() {
-//		for(int i = 0; i < bloecke.size(); i++) {
-//			Block tmp = bloecke.get(i);
-//			Vector2 position = new Vector2(tmp.getX(), tmp.getY());
-//			double width = tmp.getSize().getX();
-//			double height = tmp.getSize().getY();
-//
-//			Rectangle rec = new Rectangle(position, width, height);
-////			boolean hit = checkIntersection(rec, new Circle(ball.getX(), ball.getY(), ball.getRadius()));
-//			Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
-//			boolean hit = RectangleCircleKollision(rec, circ).isCollided();
-//			
-//			
-//			if(hit) {
-//				bloecke.remove(tmp);
-//			}
-//		}
+		for(int i = 0; i < bloecke.size(); i++) {
+			Block tmp = bloecke.get(i);
+			Vector2 position = new Vector2(tmp.getX(), tmp.getY());
+			double width = tmp.getSize().getX();
+			double height = tmp.getSize().getY();
+
+			Rectangle rec = new Rectangle(position, width, height);
+//			boolean hit = checkIntersection(rec, new Circle(ball.getX(), ball.getY(), ball.getRadius()));
+			Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
+			boolean hit = RectangleCircleKollision(rec, circ).isCollided();
+			
+			
+			if(hit) {
+				bloecke.remove(tmp);
+			}
+		}
 		
-		Vector2 position = new Vector2(bloecke.get(13).getX(), bloecke.get(13).getY());
-		double width = bloecke.get(13).getSize().getX();
-		double height = bloecke.get(13).getSize().getY();
+//		Vector2 position = new Vector2(bloecke.get(13).getX(), bloecke.get(13).getY());
+//		double width = bloecke.get(13).getSize().getX();
+//		double height = bloecke.get(13).getSize().getY();
 
 //		app.pushToServer("x="+String.valueOf(position.getX()));
 //		app.pushToServer("y="+String.valueOf(position.getY()));
 //		app.pushToServer("w="+String.valueOf(width));
 //		app.pushToServer("h="+String.valueOf(height));
 		
-		Rectangle rec = new Rectangle(position, width, height);
-		Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
-		app.pushToServer("x="+String.valueOf(circ.getCenterX()));
-		app.pushToServer("y="+String.valueOf(circ.getCenterY()));
-		app.pushToServer("r="+String.valueOf(circ.getRadius()));
-		boolean hit = RectangleCircleKollision(rec, circ).isCollided();
-		
-		
-		if(hit) {
-			bloecke.remove(13);
-		}
+//		Rectangle rec = new Rectangle(position, width, height);
+//		Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
+//		app.pushToServer("x="+String.valueOf(circ.getCenterX()));
+//		app.pushToServer("y="+String.valueOf(circ.getCenterY()));
+//		app.pushToServer("r="+String.valueOf(circ.getRadius()));
+//		boolean hit = RectangleCircleKollision(rec, circ).isCollided();
+//		
+//		
+//		if(hit) {
+//			bloecke.remove(13);
+//		}
 		
 	}
 	
@@ -217,8 +221,10 @@ public class Spielsteuerung {
 	// Gibt zurück, ob eine Kollision stattfand und wenn ja, wo, und wie lang der (minimale, quadratische) Abstand zum Rechteck ist.
 	CollisionResult RectangleCircleKollision(Rectangle rect, Circle circle)
 	{
-		double x = rect.getX() - circle.getCenterX();
-		double y = rect.getY() - circle.getCenterY();
+//		double x = rect.getX() - circle.getCenterX();
+//		double y = rect.getY() - circle.getCenterY();
+		double x = rect.getX();
+		double y = rect.getY();
 		double h = rect.getHeight();
 		double w = rect.getWidth();
 
@@ -228,7 +234,7 @@ public class Spielsteuerung {
 		Vector2 p4 = new Vector2(x, y + h);
 		
 		
-	      double minDistSq = 8000;
+	      double minDistSq = 80000;
 	      Vector2 basePoint = new Vector2(0,0);
 	      
 	      // Seiten durchgehen, Schleife kann (bzw muss, je nachdem wie Rect aussieht) entrollt werden
