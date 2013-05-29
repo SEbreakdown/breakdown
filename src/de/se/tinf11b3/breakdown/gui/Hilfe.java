@@ -45,9 +45,7 @@ public class Hilfe extends CustomComponent {
 		this.hauptmenue = hauptmenue;
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
-
-		button_hauptmenue.addStyleName("button-hauptmenue");
-
+		textArea_1.setStyleName("ta-schriftgroesse");
 		
 		button_hauptmenue.addListener(new ClickListener() {
 			
@@ -106,7 +104,6 @@ public class Hilfe extends CustomComponent {
 		textArea_1.setWidth("100.0%");
 		textArea_1.setHeight("200px");
 		textArea_1.setValue("Bevor ein neues Spiel gestartet werden kann, muss ein Schwierigkeitsgrad gewählt werden.\n\nSpielverlauf:\nDer gelbe Balken unten kann vom Spieler nach rechts und links bewegt werden. Sinn des Spiels ist mit dem Ball alle Blöcke abzuschießen. Ein getroffener Block verschwindet und der Ball prallt physikalisch korrekt ab. Wird der Ball nicht mit dem Balken nach oben abgelenkt, verliert der Spieler ein (von anfangs drei) Leben.\n\nSteuerung:\nDer gelbe Balken wird mit der Maus nach rechts und links bewegt.");
-		textArea_1.addStyleName("schriftgroesse");
 		textArea_1.setReadOnly(true);
 		verticalLayout_1.addComponent(textArea_1);
 		

@@ -39,6 +39,8 @@ public class Hauptmenue extends CustomComponent {
 
 	private Schwierigkeitsgrad schwierigkeitsgrad = new Schwierigkeitsgrad();
 	private Hilfe hilfe = new Hilfe(this);
+	private Highscore highscore = new Highscore(this);
+	
 	
 	
 
@@ -55,7 +57,7 @@ public class Hauptmenue extends CustomComponent {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		
-		button_start.addStyleName("button-start");
+		//button_start.addStyleName("button-start");
 		button_start.setDebugId("button-start");
 
 		
@@ -66,14 +68,21 @@ public class Hauptmenue extends CustomComponent {
 			}
 		});
 		
-		
-		
+			
 		
 		
 		button_hilfe.addListener(new ClickListener() {
 			
 			public void buttonClick(ClickEvent event) {
 				getWindow().setContent(hilfe);
+			}
+		});
+		
+		
+		button_highscore.addListener(new ClickListener() {
+			
+			public void buttonClick(ClickEvent event) {
+				getWindow().setContent(highscore);
 			}
 		});
 		
