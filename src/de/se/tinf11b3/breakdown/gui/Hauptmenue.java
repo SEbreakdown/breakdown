@@ -67,8 +67,8 @@ public class Hauptmenue extends CustomComponent {
 		});
 		
 		
-		button_hilfe.addStyleName("button-highscore");
-		button_hilfe.setDebugId("button-highscore");
+		
+		
 		
 		button_hilfe.addListener(new ClickListener() {
 			
