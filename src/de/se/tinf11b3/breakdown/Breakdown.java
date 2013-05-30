@@ -5,7 +5,9 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.CloseListener;
 
-import de.se.tinf11b3.breakdown.gui.Hauptmenue;
+import de.se.tinf11b3.breakdown.server.gui.Hauptmenue;
+import de.se.tinf11b3.breakdown.server.highscore.Highscorehandler;
+import de.se.tinf11b3.breakdown.server.spielverwaltung.Spielverwaltung;
 
 /**
  * Main application class.
@@ -14,6 +16,8 @@ public class Breakdown extends Application {
 
 	private Hauptmenue hauptmenue = new Hauptmenue();
 	private Highscorehandler highscorehandler = new Highscorehandler();
+	private Spielverwaltung spielverwaltung = new Spielverwaltung();
+	
 	
 	
 	@Override

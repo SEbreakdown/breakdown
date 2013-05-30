@@ -1,4 +1,4 @@
-package de.se.tinf11b3.breakdown;
+package de.se.tinf11b3.breakdown.server.highscore;
 
 public class HighscoreEntry {
 
