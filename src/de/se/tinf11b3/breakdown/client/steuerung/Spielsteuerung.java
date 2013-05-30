@@ -23,6 +23,7 @@ import gwt.g2d.client.math.Circle;
 import gwt.g2d.client.math.Rectangle;
 import gwt.g2d.client.math.Vector2;
 import gwt.g2d.client.util.FpsTimer;
+import de.se.tinf11b3.breakdown.client.vector.*;
 
 public class Spielsteuerung {
 
@@ -139,45 +140,7 @@ public class Spielsteuerung {
 
 	// TODO AUSLAGERN IN EIGENE STATISCHE KLASSE
 
-	/**
-	 * Skalarprodukt
-	 * 
-	 * @param a
-	 * @param b
-	 * @return
-	 */
-	private double dot(Vector2 a, Vector2 b) {
-		return a.getX() * b.getX() + a.getY() * b.getY();
-	}
-
-	/**
-	 * Laenge des Vektors im Quadrat (spart Wurzelrechnung ein)
-	 * 
-	 * @param a
-	 * @return
-	 */
-	private double sqr_length(Vector2 a) {
-		return dot(a, a);
-	}
-
-	/**
-	 * Vektor mal Skalar
-	 * 
-	 * @param a
-	 * @param t
-	 * @return
-	 */
-	private Vector2 vec_mal_scalar(Vector2 a, double t) {
-		return new Vector2(a.getX() * t, a.getY() * t);
-	}
-
-	private Vector2 vec_plus_vec(Vector2 a, Vector2 b) {
-		return new Vector2(a.getX() + b.getX(), a.getY() + b.getY());
-	}
-
-	private Vector2 vec_minus_vec(Vector2 a, Vector2 b) {
-		return new Vector2(a.getX() - b.getX(), a.getY() - b.getY());
-	}
+	
 
 	// TODO CODE UMSCHREIBEN
 	Vector2 PointLineDist(Vector2 point, Vector2 linestart, Vector2 lineend) {
@@ -185,13 +148,13 @@ public class Spielsteuerung {
 				- linestart.getY());
 		Vector2 b = new Vector2(point.getX() - linestart.getX(), point.getY()
 				- linestart.getY());
-		double t = dot(a, b) / (sqr_length(a));
+		double t = VectorOperations.dot(a, b) / (VectorOperations.sqr_length(a));
 
 		if(t < 0)
 			t = 0;
 		if(t > 1)
 			t = 1;
-		return vec_plus_vec(linestart, vec_mal_scalar(a, t));
+		return VectorOperations.vec_plus_vec(linestart, VectorOperations.vec_mal_scalar(a, t));
 	}
 
 	
@@ -205,9 +168,9 @@ public class Spielsteuerung {
 		// Seiten durchgehen, Schleife kann (bzw muss, je nachdem wie Rect
 		// aussieht) entrollt werden
 		Vector2 base = PointLineDist(circle.getCenter(), p1, p2);
-		if(sqr_length(vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
+		if(VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
 			// Kürzerer Abstand, neu zuweisen.
-			minDistSq = sqr_length(vec_minus_vec(circle.getCenter(), base));
+			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
 		}
 
@@ -241,29 +204,29 @@ public class Spielsteuerung {
 		// Seiten durchgehen, Schleife kann (bzw muss, je nachdem wie Rect
 		// aussieht) entrollt werden
 		Vector2 base = PointLineDist(circle.getCenter(), p1, p2);
-		if(sqr_length(vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
+		if(VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
 			// Kürzerer Abstand, neu zuweisen.
-			minDistSq = sqr_length(vec_minus_vec(circle.getCenter(), base));
+			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
 		}
 
 		base = PointLineDist(circle.getCenter(), p2, p3);
-		if(sqr_length(vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
+		if(VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
 			// Kürzerer Abstand, neu zuweisen.
-			minDistSq = sqr_length(vec_minus_vec(circle.getCenter(), base));
+			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
 		}
 
 		base = PointLineDist(circle.getCenter(), p3, p4);
-		if(sqr_length(vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
+		if(VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
 			// Kürzerer Abstand, neu zuweisen.
-			minDistSq = sqr_length(vec_minus_vec(circle.getCenter(), base));
+			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
 		}
 		base = PointLineDist(circle.getCenter(), p4, p1);
-		if(sqr_length(vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
+		if(VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
 			// Kürzerer Abstand, neu zuweisen.
-			minDistSq = sqr_length(vec_minus_vec(circle.getCenter(), base));
+			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
 		}
 
