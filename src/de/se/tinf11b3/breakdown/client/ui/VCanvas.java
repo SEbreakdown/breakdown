@@ -26,6 +26,12 @@ import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.MouseDownEvent;
+import com.google.gwt.event.dom.client.MouseDownHandler;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.event.dom.client.MouseUpEvent;
+import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
@@ -36,35 +42,28 @@ import com.vaadin.terminal.gwt.client.ui.Field;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
+import de.se.tinf11b3.breakdown.client.steuerung.ISteuerung;
 import de.se.tinf11b3.breakdown.client.steuerung.Spielsteuerung;
-
-
-
 
 /**
  * Clientside Part of the Widget
  * 
  * @author michael
- *
+ * 
  */
 public class VCanvas extends Composite implements Paintable, Field,
-		ChangeHandler, BlurHandler {
-
-	
-	
+		ChangeHandler, BlurHandler, Widget_GUI_Interface {
 
 	// Options
 	public static int WIDTH = 500;
 	public static int HEIGHT = 500;
 	public static Color BACKGROUNDCOLOR = KnownColor.CORNFLOWER_BLUE;
-	
-	
+
 	/**
 	 * The input node CSS classname.
 	 */
 	public static final String CLASSNAME = "v-canvas";
-	
-	
+
 	protected String id;
 	protected ApplicationConnection client;
 
@@ -74,10 +73,11 @@ public class VCanvas extends Composite implements Paintable, Field,
 	private final Surface surface = new Surface(500, 500);
 
 	// Init Steuerung
-	private Spielsteuerung steuerung = new Spielsteuerung(surface, this);
+	private Spielsteuerung steuerung = new Spielsteuerung(this);
 
-	
-	
+	// Interface für diese GUI
+	private ISteuerung steuerungsInterface = (ISteuerung) steuerung;
+
 	/**
 	 * Model: View
 	 * 
@@ -87,68 +87,72 @@ public class VCanvas extends Composite implements Paintable, Field,
 
 		surface.fillBackground(BACKGROUNDCOLOR);
 		flowPanel.add(surface);
-		
+
+		/**
+		 * 
+		 * MouseEventListener rufen Interface der Steuerung auf
+		 * 
+		 */
+
+		surface.addMouseMoveHandler(new MouseMoveHandler() {
+			public void onMouseMove(MouseMoveEvent event) {
+				steuerungsInterface.mouseMoved(event);
+			}
+		});
+
+		surface.addMouseUpHandler(new MouseUpHandler() {
+			public void onMouseUp(MouseUpEvent event) {
+				steuerungsInterface.mouseUp(event);
+			}
+		});
+
+		surface.addMouseDownHandler(new MouseDownHandler() {
+			public void onMouseDown(MouseDownEvent event) {
+				steuerungsInterface.mouseDown(event);
+			}
+		});
+
+		steuerungsInterface.requestRepaintGameObjects();
+
 		initWidget(flowPanel);
 		setStyleName(CLASSNAME);
 	}
-	
-	
-	
-	
-	
-	
+
 	public void drawAllGameObjects(Ball ball, Paddle paddle, ArrayList<Block> bloecke) {
 		surface.clear().fillBackground(KnownColor.CORNFLOWER_BLUE);
-		
+
 		drawBall(ball);
 		drawBlocks(bloecke);
 		drawPaddle(paddle);
 	}
-	
-	
-	
-	
-	
+
 	public void drawBlocks(ArrayList<Block> bloecke) {
 		for(Block tmp : bloecke) {
 			drawBlock(tmp);
 		}
 	}
-	
-	
-	public void drawBlock(Block block){
+
+	public void drawBlock(Block block) {
 		block.drawObject(surface);
 	}
-	
-	
-	public void drawBall(Ball ball){
+
+	public void drawBall(Ball ball) {
 		ball.drawObject(surface);
 	}
-	
-	public void drawPaddle(Paddle paddle){
+
+	public void drawPaddle(Paddle paddle) {
 		paddle.drawObject(surface);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * Push changed Variables to the Server
 	 * 
 	 * @param message
 	 */
 	public void pushToServer(String message) {
-		if(client != null) client.updateVariable(id, "debug", message, true);
+		if(client != null)
+			client.updateVariable(id, "debug", message, true);
 	}
-	
 
 	/**
 	 * Get updated Variables from Server
@@ -162,14 +166,12 @@ public class VCanvas extends Composite implements Paintable, Field,
 		}
 	}
 
-	
 	/**
 	 * Method is public to let popupview force synchronization on close.
 	 */
 	public void synchronizeContentToServer() {
 	}
 
-	
 	public void onBlur(BlurEvent event) {
 		synchronizeContentToServer();
 	}

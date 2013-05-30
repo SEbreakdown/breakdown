@@ -3,43 +3,32 @@ package de.se.tinf11b3.breakdown.client.steuerung;
 import java.util.ArrayList;
 
 import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.dom.client.MouseDownHandler;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
-import com.google.gwt.event.dom.client.MouseUpHandler;
 
 import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
-import de.se.tinf11b3.breakdown.client.ui.VCanvas;
-import gwt.g2d.client.graphics.DirectShapeRenderer;
+import de.se.tinf11b3.breakdown.client.ui.Widget_GUI_Interface;
 import gwt.g2d.client.graphics.KnownColor;
-import gwt.g2d.client.graphics.Surface;
-import gwt.g2d.client.graphics.shapes.Shape;
-import gwt.g2d.client.graphics.shapes.ShapeBuilder;
 import gwt.g2d.client.math.Circle;
 import gwt.g2d.client.math.Rectangle;
 import gwt.g2d.client.math.Vector2;
 import gwt.g2d.client.util.FpsTimer;
 import de.se.tinf11b3.breakdown.client.vector.*;
 
-public class Spielsteuerung {
+public class Spielsteuerung implements ISteuerung {
 
-	private Surface surface;
 	private boolean gameStarted = false;
 	private Paddle paddle;
 	private Ball ball;
 	private ArrayList<Block> bloecke = new ArrayList<Block>();
 	private int x_direction = 5, y_direction = -5;
-	private VCanvas app;
+	private Widget_GUI_Interface app;
 
-	public Spielsteuerung(final Surface surface, final VCanvas app) {
-		this.surface = surface;
+	public Spielsteuerung(final Widget_GUI_Interface app) {
 		this.app = app;
-
-		
 
 		// Init Paddle
 		paddle = new Paddle(250, 480, KnownColor.BLACK, 100);
@@ -48,61 +37,10 @@ public class Spielsteuerung {
 		ball = new Ball(250, 465, KnownColor.GREEN, 10);
 
 		// Init Blocks
-		initLevel(surface);
+		initLevel();
 
 		// Draw them all
 		app.drawAllGameObjects(ball, paddle, bloecke);
-
-		// Move Paddle along the Canvas
-		surface.addMouseMoveHandler(new MouseMoveHandler() {
-			public void onMouseMove(MouseMoveEvent event) {
-				int mouseX = event.getX();
-
-				// Innerhalb des Canvas
-				if(event.getX() <= 450 && event.getX() >= 50) {
-					paddle.setX(mouseX);
-
-					if(gameStarted == false) {
-						ball.setX(mouseX);
-					}
-					app.drawAllGameObjects(ball, paddle, bloecke);
-				}
-
-			}
-		});
-
-		surface.addMouseUpHandler(new MouseUpHandler() {
-			public void onMouseUp(MouseUpEvent event) {
-			}
-		});
-
-		surface.addMouseDownHandler(new MouseDownHandler() {
-			public void onMouseDown(MouseDownEvent event) {
-				app.pushToServer("Hello, this is Client :P");
-
-				if(gameStarted == false) {
-
-					gameStarted = true;
-
-					FpsTimer timer = new FpsTimer(60) {
-						@Override
-						public void update() {
-
-							checkCollision();
-
-							ball.setY(ball.getY() + y_direction);
-							ball.setX(ball.getX() + x_direction);
-
-							app.drawAllGameObjects(ball, paddle, bloecke);
-						}
-
-					};
-
-					timer.start();
-				}
-
-			}
-		});
 
 	}
 
@@ -139,15 +77,14 @@ public class Spielsteuerung {
 
 	// TODO AUSLAGERN IN EIGENE STATISCHE KLASSE
 
-	
-
 	// TODO CODE UMSCHREIBEN
 	Vector2 PointLineDist(Vector2 point, Vector2 linestart, Vector2 lineend) {
 		Vector2 a = new Vector2(lineend.getX() - linestart.getX(), lineend.getY()
 				- linestart.getY());
 		Vector2 b = new Vector2(point.getX() - linestart.getX(), point.getY()
 				- linestart.getY());
-		double t = VectorOperations.dot(a, b) / (VectorOperations.sqr_length(a));
+		double t = VectorOperations.dot(a, b)
+				/ (VectorOperations.sqr_length(a));
 
 		if(t < 0)
 			t = 0;
@@ -156,14 +93,6 @@ public class Spielsteuerung {
 		return VectorOperations.vec_plus_vec(linestart, VectorOperations.vec_mal_scalar(a, t));
 	}
 
-	
-	
-	
-
-	
-	
-	
-	
 	// Gibt zurück, ob eine Kollision stattfand und wenn ja, wo, und wie lang
 	// der (minimale, quadratische) Abstand zum Rechteck ist.
 	private CollisionResult RectangleCircleKollision(Rectangle rect, Circle circle) {
@@ -180,7 +109,6 @@ public class Spielsteuerung {
 		double minDistSq = 80000;
 		Vector2 basePoint = new Vector2(0, 0);
 
-		
 		// Seiten durchgehen, Schleife kann (bzw muss, je nachdem wie Rect
 		// aussieht) entrollt werden
 		Vector2 base = PointLineDist(circle.getCenter(), p1, p2);
@@ -218,7 +146,7 @@ public class Spielsteuerung {
 
 	private void checkPaddleCollision() {
 
-		Vector2 position = new Vector2(paddle.getX()-paddle.getSize()/2, paddle.getY());
+		Vector2 position = new Vector2(paddle.getX() - paddle.getSize() / 2, paddle.getY());
 		double width = paddle.getSize();
 		double height = 10;
 
@@ -226,11 +154,11 @@ public class Spielsteuerung {
 		Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
 		boolean hit = RectangleCircleKollision(rec, circ).isCollided();
 
-		//Reached Paddle
+		// Reached Paddle
 		if(hit) {
 			app.pushToServer("HIT PADDLE");
 		}
-		
+
 	}
 
 	private void checkFrameCollision() {
@@ -245,14 +173,12 @@ public class Spielsteuerung {
 		}
 	}
 
-	
-
 	/**
 	 * Inits Level 1 with the Blogs
 	 * 
 	 * @param surface
 	 */
-	private void initLevel(Surface surface) {
+	private void initLevel() {
 
 		int x = 30;
 		int y = 10;
@@ -265,6 +191,52 @@ public class Spielsteuerung {
 				x = 30;
 			}
 		}
+	}
+
+	public void mouseMoved(MouseMoveEvent event) {
+		int mouseX = event.getX();
+
+		// Innerhalb des Canvas
+		if(event.getX() <= 450 && event.getX() >= 50) {
+			paddle.setX(mouseX);
+
+			if(gameStarted == false) {
+				ball.setX(mouseX);
+			}
+			app.drawAllGameObjects(ball, paddle, bloecke);
+		}
+	}
+
+	public void mouseUp(MouseUpEvent event) {
+	}
+
+	public void mouseDown(MouseDownEvent event) {
+		app.pushToServer("Hello, this is Client :P");
+
+		if(gameStarted == false) {
+
+			gameStarted = true;
+
+			FpsTimer timer = new FpsTimer(60) {
+				@Override
+				public void update() {
+
+					checkCollision();
+
+					ball.setY(ball.getY() + y_direction);
+					ball.setX(ball.getX() + x_direction);
+
+					app.drawAllGameObjects(ball, paddle, bloecke);
+				}
+
+			};
+
+			timer.start();
+		}
+	}
+
+	public void requestRepaintGameObjects() {
+		app.drawAllGameObjects(ball, paddle, bloecke);
 	}
 
 }
