@@ -1,0 +1,3 @@
+Rainer,500
+Max,230
+Fritz,200
