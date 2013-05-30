@@ -19,8 +19,8 @@ public class Block extends Gameobject {
 	 * @param color
 	 * @param size
 	 */
-	public Block(int x, int y, Color color, Vector2 size, Surface surface) {
-		super(x, y, color, surface);
+	public Block(int x, int y, Color color, Vector2 size) {
+		super(x, y, color);
 		this.size = size;
 	}
 
@@ -33,7 +33,7 @@ public class Block extends Gameobject {
 	}
 
 	@Override
-	public void drawObject() {
+	public void drawObject(Surface surface) {
 		// Block zeichnen
 		ShapeBuilder sb = new ShapeBuilder();
 			sb.drawRect(x, y, size.getX(), size.getY());

@@ -19,8 +19,8 @@ public class Paddle extends Gameobject {
 	 * @param y
 	 * @param size
 	 */
-	public Paddle(int x, int y, Color color, double size, Surface surface) {
-		super(x, y, color, surface);
+	public Paddle(int x, int y, Color color, double size) {
+		super(x, y, color);
 		this.size = size;
 	}
 
@@ -30,7 +30,7 @@ public class Paddle extends Gameobject {
 
 	
 	@Override
-	public void drawObject() {
+	public void drawObject(Surface surface) {
 	
 		// Paddle zeichnen
 		ShapeBuilder sb = new ShapeBuilder();

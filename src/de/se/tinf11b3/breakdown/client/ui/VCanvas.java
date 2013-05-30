@@ -16,6 +16,8 @@
 
 package de.se.tinf11b3.breakdown.client.ui;
 
+import java.util.ArrayList;
+
 import gwt.g2d.client.graphics.Color;
 import gwt.g2d.client.graphics.KnownColor;
 import gwt.g2d.client.graphics.Surface;
@@ -31,6 +33,9 @@ import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.Field;
 
+import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
+import de.se.tinf11b3.breakdown.client.gameobjects.Block;
+import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
 import de.se.tinf11b3.breakdown.client.steuerung.Spielsteuerung;
 
 
@@ -63,9 +68,7 @@ public class VCanvas extends Composite implements Paintable, Field,
 	protected String id;
 	protected ApplicationConnection client;
 
-	
 	private final FlowPanel flowPanel = new FlowPanel();
-
 
 	// Init Canvas
 	private final Surface surface = new Surface(500, 500);
@@ -94,7 +97,37 @@ public class VCanvas extends Composite implements Paintable, Field,
 	
 	
 	
+	public void drawAllGameObjects(Ball ball, Paddle paddle, ArrayList<Block> bloecke) {
+		surface.clear().fillBackground(KnownColor.CORNFLOWER_BLUE);
+		
+		drawBall(ball);
+		drawBlocks(bloecke);
+		drawPaddle(paddle);
+	}
 	
+	
+	
+	
+	
+	public void drawBlocks(ArrayList<Block> bloecke) {
+		for(Block tmp : bloecke) {
+			drawBlock(tmp);
+		}
+	}
+	
+	
+	public void drawBlock(Block block){
+		block.drawObject(surface);
+	}
+	
+	
+	public void drawBall(Ball ball){
+		ball.drawObject(surface);
+	}
+	
+	public void drawPaddle(Paddle paddle){
+		paddle.drawObject(surface);
+	}
 	
 	
 	

@@ -42,16 +42,16 @@ public class Spielsteuerung {
 		
 
 		// Init Paddle
-		paddle = new Paddle(250, 480, KnownColor.BLACK, 100, surface);
+		paddle = new Paddle(250, 480, KnownColor.BLACK, 100);
 
 		// Init Ball
-		ball = new Ball(250, 465, KnownColor.GREEN, 10, surface);
+		ball = new Ball(250, 465, KnownColor.GREEN, 10);
 
 		// Init Blocks
 		initLevel(surface);
 
 		// Draw them all
-		drawAllObjects();
+		app.drawAllGameObjects(ball, paddle, bloecke);
 
 		// Move Paddle along the Canvas
 		surface.addMouseMoveHandler(new MouseMoveHandler() {
@@ -64,9 +64,8 @@ public class Spielsteuerung {
 
 					if(gameStarted == false) {
 						ball.setX(mouseX);
-						ball.drawObject();
 					}
-					drawAllObjects();
+					app.drawAllGameObjects(ball, paddle, bloecke);
 				}
 
 			}
@@ -94,7 +93,7 @@ public class Spielsteuerung {
 							ball.setY(ball.getY() + y_direction);
 							ball.setX(ball.getX() + x_direction);
 
-							drawAllObjects();
+							app.drawAllGameObjects(ball, paddle, bloecke);
 						}
 
 					};
@@ -246,18 +245,7 @@ public class Spielsteuerung {
 		}
 	}
 
-	private void drawAllObjects() {
-		surface.clear().fillBackground(KnownColor.CORNFLOWER_BLUE);
-		ball.drawObject();
-		drawBlocks();
-		paddle.drawObject();
-	}
-
-	private void drawBlocks() {
-		for(Block tmp : bloecke) {
-			tmp.drawObject();
-		}
-	}
+	
 
 	/**
 	 * Inits Level 1 with the Blogs
@@ -270,7 +258,7 @@ public class Spielsteuerung {
 		int y = 10;
 
 		for(int i = 0; i < 15; i++) {
-			bloecke.add(new Block(x, y, KnownColor.RED, new Vector2(80, 30), surface));
+			bloecke.add(new Block(x, y, KnownColor.RED, new Vector2(80, 30)));
 			x += 90;
 			if((i + 1) % 5 == 0) {
 				y += 50;

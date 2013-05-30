@@ -18,8 +18,8 @@ public class Ball extends Gameobject {
 	 * @param color
 	 * @param radius
 	 */
-	public Ball(int x, int y, Color color, int radius, Surface surface) {
-		super(x, y, color, surface);
+	public Ball(int x, int y, Color color, int radius) {
+		super(x, y, color);
 		this.radius = radius;
 	}
 
@@ -32,7 +32,7 @@ public class Ball extends Gameobject {
 	}
 
 	@Override
-	public void drawObject() {
+	public void drawObject(Surface surface) {
 
 		shapeRenderer = new DirectShapeRenderer(surface);
 
