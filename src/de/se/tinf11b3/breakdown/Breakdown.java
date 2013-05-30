@@ -13,7 +13,9 @@ import de.se.tinf11b3.breakdown.gui.Hauptmenue;
 public class Breakdown extends Application {
 
 	private Hauptmenue hauptmenue = new Hauptmenue();
-
+	private Highscorehandler highscorehandler = new Highscorehandler();
+	
+	
 	@Override
 	public void init() {
 		System.out.println("Player joined");
