@@ -39,7 +39,7 @@ public class Spielsteuerung {
 		this.surface = surface;
 		this.app = app;
 
-		surface.fillBackground(VCanvas.BACKGROUNDCOLOR);
+		
 
 		// Init Paddle
 		paddle = new Paddle(250, 480, KnownColor.BLACK, 100, surface);
@@ -160,25 +160,6 @@ public class Spielsteuerung {
 	
 	
 	
-	private CollisionResult LineCircleKollision(Vector2 p1, Vector2 p2, Circle circle) {
-		double minDistSq = 80000;
-		Vector2 basePoint = new Vector2(0, 0);
-
-		
-		// Seiten durchgehen, Schleife kann (bzw muss, je nachdem wie Rect
-		// aussieht) entrollt werden
-		Vector2 base = PointLineDist(circle.getCenter(), p1, p2);
-		if(VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
-			// Kürzerer Abstand, neu zuweisen.
-			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
-			basePoint = base;
-		}
-
-		CollisionResult result = new CollisionResult(minDistSq < circle.getRadius()
-				* circle.getRadius(), basePoint, minDistSq);
-
-		return result;
-	}
 
 	
 	
@@ -186,7 +167,7 @@ public class Spielsteuerung {
 	
 	// Gibt zurück, ob eine Kollision stattfand und wenn ja, wo, und wie lang
 	// der (minimale, quadratische) Abstand zum Rechteck ist.
-	CollisionResult RectangleCircleKollision(Rectangle rect, Circle circle) {
+	private CollisionResult RectangleCircleKollision(Rectangle rect, Circle circle) {
 		double x = rect.getX();
 		double y = rect.getY();
 		double h = rect.getHeight();

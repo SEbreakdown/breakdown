@@ -33,28 +33,39 @@ import com.vaadin.terminal.gwt.client.ui.Field;
 
 import de.se.tinf11b3.breakdown.client.steuerung.Spielsteuerung;
 
+
+
+
 /**
- * This class implements a basic client side rich text editor component.
+ * Clientside Part of the Widget
  * 
- * @author IT Mill Ltd.
- * 
+ * @author michael
+ *
  */
 public class VCanvas extends Composite implements Paintable, Field,
 		ChangeHandler, BlurHandler {
 
-	/**
-	 * The input node CSS classname.
-	 */
-	public static final String CLASSNAME = "v-richtextarea";
-	protected String id;
-	protected ApplicationConnection client;
-
-	private final FlowPanel flowPanel = new FlowPanel();
+	
+	
 
 	// Options
 	public static int WIDTH = 500;
 	public static int HEIGHT = 500;
 	public static Color BACKGROUNDCOLOR = KnownColor.CORNFLOWER_BLUE;
+	
+	
+	/**
+	 * The input node CSS classname.
+	 */
+	public static final String CLASSNAME = "v-canvas";
+	
+	
+	protected String id;
+	protected ApplicationConnection client;
+
+	
+	private final FlowPanel flowPanel = new FlowPanel();
+
 
 	// Init Canvas
 	private final Surface surface = new Surface(500, 500);
@@ -62,8 +73,16 @@ public class VCanvas extends Composite implements Paintable, Field,
 	// Init Steuerung
 	private Spielsteuerung steuerung = new Spielsteuerung(surface, this);
 
+	
+	
+	/**
+	 * Model: View
+	 * 
+	 * Canvas als GUI-Element
+	 */
 	public VCanvas() {
 
+		surface.fillBackground(BACKGROUNDCOLOR);
 		flowPanel.add(surface);
 		
 		initWidget(flowPanel);
@@ -71,11 +90,36 @@ public class VCanvas extends Composite implements Paintable, Field,
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Push changed Variables to the Server
+	 * 
+	 * @param message
+	 */
 	public void pushToServer(String message) {
 		if(client != null) client.updateVariable(id, "debug", message, true);
 	}
 	
 
+	/**
+	 * Get updated Variables from Server
+	 */
 	public void updateFromUIDL(final UIDL uidl, ApplicationConnection client) {
 		this.client = client;
 		id = uidl.getId();
@@ -85,12 +129,14 @@ public class VCanvas extends Composite implements Paintable, Field,
 		}
 	}
 
+	
 	/**
 	 * Method is public to let popupview force synchronization on close.
 	 */
 	public void synchronizeContentToServer() {
 	}
 
+	
 	public void onBlur(BlurEvent event) {
 		synchronizeContentToServer();
 	}
@@ -98,38 +144,4 @@ public class VCanvas extends Composite implements Paintable, Field,
 	public void onChange(ChangeEvent event) {
 	}
 
-	// Kugel
-	// surface.save()
-	// .setFillStyle(KnownColor.RED);
-	// shapeRenderer.beginPath()
-	// .moveTo(new Vector2(100, 100))
-	// .drawCircle(new Vector2(10, 10), 20)
-	// .closePath()
-	// .fill();
-	// surface.restore();
-	//
-
-	// surface.setFillStyle(KnownColor.BLACK).fillShape(new
-	// ShapeBuilder().drawCircle(250, 400, 5).build());
-
-	// Stift in Rot
-	// surface.setFillStyle(KnownColor.RED);
-	// surface.setLineWidth(10);
-	// surface.setStrokeStyle(KnownColor.RED);
-
-	// Let the show begin!
-	// ShapeBuilder sb = new ShapeBuilder();
-	// sb.drawLineSegment(new Vector2(200, 480), new Vector2(300, 480));
-	// Shape shape = sb.build();
-	// surface.strokeShape(shape);
-
-	// new Cycle zum Warten!
-
-	// private Particle p = new Particle(
-	// new Vector2(Random.nextInt(WIDTH), Random.nextInt(HEIGHT)),
-	// new Vector2(Math.random(), Math.random()).normalize(),
-	// new Color(Random.nextInt(256),
-	// Random.nextInt(256),
-	// Random.nextInt(256),
-	// 1.0));
 }
