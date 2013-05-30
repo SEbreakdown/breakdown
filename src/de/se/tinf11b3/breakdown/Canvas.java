@@ -6,6 +6,8 @@ import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractComponent;
 
+import de.se.tinf11b3.breakdown.server.spielverwaltung.Spielverwaltung;
+
 /**
  * Server side component for the VDrawCanvas widget.
  */
@@ -16,6 +18,14 @@ public class Canvas extends AbstractComponent {
 	private int clicks = 0;
 	private String debug_text = "DEBUG:";
 
+	private Spielverwaltung spielverwaltung;
+	
+	
+	public Canvas(Spielverwaltung spielverwaltung) {
+		this.spielverwaltung = spielverwaltung;
+	}	
+	
+	
 	@Override
 	public void paintContent(PaintTarget target) throws PaintException {
 		super.paintContent(target);

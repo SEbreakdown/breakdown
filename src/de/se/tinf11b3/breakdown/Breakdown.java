@@ -14,9 +14,8 @@ import de.se.tinf11b3.breakdown.server.spielverwaltung.Spielverwaltung;
  */
 public class Breakdown extends Application {
 
-	private Hauptmenue hauptmenue = new Hauptmenue();
-	private Highscorehandler highscorehandler = new Highscorehandler();
 	private Spielverwaltung spielverwaltung = new Spielverwaltung();
+	private Hauptmenue hauptmenue = new Hauptmenue(spielverwaltung);
 	
 	
 	

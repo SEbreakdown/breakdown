@@ -1,186 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="de.se.tinf11b3.breakdown.server.Breakdown" project="Breakdown" 
-    file="/Breakdown/src/de/se/tinf11b3/breakdown/server/Breakdown.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-22" y="120"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="de.se.tinf11b3.breakdown.Canvas" project="Breakdown" 
+  <class id="1" language="java" name="de.se.tinf11b3.breakdown.Canvas" project="Breakdown" 
     file="/Breakdown/src/de/se/tinf11b3/breakdown/Canvas.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="719" y="753"/>    
+    <position height="-1" width="-1" x="466" y="514"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="de.se.tinf11b3.breakdown.server.gui.Hauptmenue" project="Breakdown" 
+  <class id="2" language="java" name="de.se.tinf11b3.breakdown.server.gui.Hauptmenue" project="Breakdown" 
     file="/Breakdown/src/de/se/tinf11b3/breakdown/server/gui/Hauptmenue.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="396" y="120"/>    
+    <position height="-1" width="-1" x="732" y="170"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="de.se.tinf11b3.breakdown.server.gui.Highscore" project="Breakdown" 
+  <class id="3" language="java" name="de.se.tinf11b3.breakdown.server.gui.Highscore" project="Breakdown" 
     file="/Breakdown/src/de/se/tinf11b3/breakdown/server/gui/Highscore.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="725" y="131"/>    
+    <position height="-1" width="-1" x="1165" y="103"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="de.se.tinf11b3.breakdown.server.gui.Hilfe" project="Breakdown" 
+  <class id="4" language="java" name="de.se.tinf11b3.breakdown.server.gui.Hilfe" project="Breakdown" 
     file="/Breakdown/src/de/se/tinf11b3/breakdown/server/gui/Hilfe.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="725" y="356"/>    
+    <position height="-1" width="-1" x="1165" y="326"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="de.se.tinf11b3.breakdown.server.gui.Schwierigkeitsgrad" project="Breakdown" 
-    file="/Breakdown/src/de/se/tinf11b3/breakdown/server/gui/Schwierigkeitsgrad.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="397" y="567"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true"/>      
-      <operations public="true" package="true" protected="true" private="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="de.se.tinf11b3.breakdown.server.gui.Spielfenster" project="Breakdown" 
+  <class id="5" language="java" name="de.se.tinf11b3.breakdown.server.gui.Spielfenster" project="Breakdown" 
     file="/Breakdown/src/de/se/tinf11b3/breakdown/server/gui/Spielfenster.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="719" y="566"/>    
+    <position height="-1" width="-1" x="1161" y="768"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="de.se.tinf11b3.breakdown.server.highscore.HighscoreReader" project="Breakdown" 
+  <class id="6" language="java" name="de.se.tinf11b3.breakdown.Breakdown" project="Breakdown" 
+    file="/Breakdown/src/de/se/tinf11b3/breakdown/Breakdown.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="289" y="165"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="de.se.tinf11b3.breakdown.server.highscore.HighscoreReader" project="Breakdown" 
     file="/Breakdown/src/de/se/tinf11b3/breakdown/server/highscore/HighscoreReader.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-24" y="514"/>    
+    <position height="-1" width="-1" x="386" y="750"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="de.se.tinf11b3.breakdown.server.highscore.Highscorehandler" project="Breakdown" 
+  <class id="8" language="java" name="de.se.tinf11b3.breakdown.server.highscore.Highscorehandler" project="Breakdown" 
     file="/Breakdown/src/de/se/tinf11b3/breakdown/server/highscore/Highscorehandler.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-13" y="273"/>    
+    <position height="-1" width="-1" x="147" y="511"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="de.se.tinf11b3.breakdown.server.highscore.HighscoreEntry" project="Breakdown" 
+  <class id="9" language="java" name="de.se.tinf11b3.breakdown.server.highscore.HighscoreEntry" project="Breakdown" 
     file="/Breakdown/src/de/se/tinf11b3/breakdown/server/highscore/HighscoreEntry.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="176" y="435"/>    
+    <position height="-1" width="-1" x="110" y="796"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <association id="11">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="12" name="hauptmenue"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="14">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="15" name="highscorehandler"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="17">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="18" name="entrylist"/>      
-      <multiplicity id="19" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="20">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="21" name="schwierigkeitsgrad"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="23">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="24" name="canvas_1"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
+  <class id="10" language="java" name="de.se.tinf11b3.breakdown.server.spielverwaltung.Spielverwaltung" 
+    project="Breakdown" file="/Breakdown/src/de/se/tinf11b3/breakdown/server/spielverwaltung/Spielverwaltung.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="288" y="307"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="de.se.tinf11b3.breakdown.server.gui.Schwierigkeitsgrad" project="Breakdown" 
+    file="/Breakdown/src/de/se/tinf11b3/breakdown/server/gui/Schwierigkeitsgrad.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1163" y="554"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association id="12">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="13" name="hauptmenue"/>      
+      <multiplicity id="14" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="26">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="27" name="spielfenster"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="29">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="30" name="hauptmenue"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="32">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="33" name="reader"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
+  <association id="15">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="16" name="highscorehandler"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="35">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="36" name="hauptmenue"/>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
+  <association id="18">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="19" name="hauptmenue"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="22" name="spielverwaltung"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="24">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="25" name="highscore"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="38">    
+  <association id="27">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="28" name="schwierigkeitsgrad"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="31" name="spielverwaltung"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="34" name="hilfe"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="37" name="hauptmenue"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="40" name="entrylist"/>      
+      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="39" name="hilfe"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
+      <attribute id="43" name="hauptmenue"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="46" name="canvas_1"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="49" name="spielfenster"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="41">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="42" name="highscore"/>      
-      <multiplicity id="43" minimum="0" maximum="1"/>    
+  <association id="51">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="52" name="reader"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
