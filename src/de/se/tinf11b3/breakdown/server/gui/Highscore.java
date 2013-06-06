@@ -45,6 +45,9 @@ public class Highscore extends CustomComponent {
 	private ArrayList<String> arrayListName;
 	private String zeile;
 	
+	private String dateiname= "/highscore.txt";
+	
+	
 	/**
 	 * The constructor should first build the main layout, set the
 	 * composition root and then do any custom initialization.
@@ -140,7 +143,7 @@ public class Highscore extends CustomComponent {
 	public void highscoreAuslesen(){
 		try
 		{
-			FileReader fileReader = new FileReader("/home/dennis/Dokumente/highscore.txt");
+			FileReader fileReader = new FileReader(dateiname);
 			BufferedReader reader = new BufferedReader(fileReader);
 			zeile = null;
 			arrayListZeileninhalt = new ArrayList<String>();
@@ -174,6 +177,11 @@ public class Highscore extends CustomComponent {
 		{
 			ex.printStackTrace();
 		}
+		
+		for(int i=0; i<arrayListName.size(); i++){
+			System.out.println(arrayListName.get(i));
+		}
+		
 	}
 	
 	
@@ -194,7 +202,7 @@ public class Highscore extends CustomComponent {
 			arrayPunkte[stelle]=punkte;
 			arrayListName.set(stelle, name);
 			try {
-				FileWriter fw = new FileWriter("/home/dennis/Dokumente/highscore.txt");
+				FileWriter fw = new FileWriter(dateiname);
 			    PrintWriter pw = new PrintWriter( fw );
 			    for (int i = 0; i < 5; i++)
 			    {

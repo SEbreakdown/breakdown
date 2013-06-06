@@ -1,0 +1,5 @@
+500 Rainer
+230 Max
+200 Fritz
+100 Didi
+23 MitschL
