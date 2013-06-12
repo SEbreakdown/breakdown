@@ -113,10 +113,10 @@ public class Highscore extends CustomComponent {
 		table_1.setHeight("-1px");
 		table_1.addContainerProperty("Punkte", String.class, null);
 		table_1.addContainerProperty("Name", String.class,  null);
-		highscoreAuslesen();
-		for (int i=0; i<5; i++){
-			table_1.addItem(new Object[] {arrayPunkte[i],arrayListName.get(i)}, new Integer(i));
-		}
+//		highscoreAuslesen();
+//		for (int i=0; i<5; i++){
+//			table_1.addItem(new Object[] {arrayPunkte[i],arrayListName.get(i)}, new Integer(i));
+//		}
 		verticalLayout_1.addComponent(table_1);
 				
 		
@@ -172,15 +172,15 @@ public class Highscore extends CustomComponent {
 				arrayPunkte[i]=punkte;
 				arrayListName.add(name);
 			}
+			for(int i=0; i<arrayListName.size(); i++){
+				System.out.println(arrayListName.get(i));
+			}
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
 		
-		for(int i=0; i<arrayListName.size(); i++){
-			System.out.println(arrayListName.get(i));
-		}
 		
 	}
 	
