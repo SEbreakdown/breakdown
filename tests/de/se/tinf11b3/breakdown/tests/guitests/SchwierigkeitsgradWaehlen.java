@@ -1,6 +1,7 @@
 package de.se.tinf11b3.breakdown.tests.guitests;
 
-import static org.junit.Assert.assertEquals;
+
+import junit.framework.Assert;
 
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.Selenium;
@@ -9,7 +10,7 @@ import cucumber.annotation.After;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
-import cucumber.runtime.PendingException;
+import static org.junit.Assert.*;
 
 public class SchwierigkeitsgradWaehlen {
 
@@ -25,22 +26,43 @@ public class SchwierigkeitsgradWaehlen {
 	@When("^I press “Spiel starten”$")
 	public void I_press_Spiel_starten() throws Throwable {
 		selenium.open("/Breakdown/");
-		selenium.click("css=span.v-button-wrap");	//Spielstart
+		try{
+			selenium.click("css=span.v-button-wrap");	//Spielstart
+		}
+		catch(com.thoughtworks.selenium.SeleniumException e){
+			assertFalse(true);
+		}
 	}
 
 	@Then("^I should see “Leicht”$")
 	public void I_should_see_Leicht() throws Throwable {
-		selenium.click("css=span.v-button-wrap");	//Leicht
+		try{
+			selenium.click("css=span.v-button-wrap");	//Leicht
+		}
+		catch(com.thoughtworks.selenium.SeleniumException e){
+			assertFalse(true);
+		}
+		
 	}
 
 	@Then("^I should see “Mittel”$")
 	public void I_should_see_Mittel() throws Throwable {
-		selenium.click("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[2]/div/div/span");	//Mittel
+		try{
+			selenium.click("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[2]/div/div/span");	//Mittel
+		}
+		catch(com.thoughtworks.selenium.SeleniumException e){
+			assertFalse(true);
+		}
 	}
 
 	@Then("^I should see “Schwer”$")
 	public void I_should_see_Schwer() throws Throwable {
-		selenium.click("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[3]/div/div/span");	//Schwer
+		try{
+			selenium.click("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[3]/div/div/span"); // Schwer
+		}
+		catch(com.thoughtworks.selenium.SeleniumException e){
+			assertFalse(true);
+		}
 	}
 	
 	@After
