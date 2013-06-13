@@ -9,14 +9,16 @@ import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
+import de.se.tinf11b3.breakdown.client.ui.Widget_GUI_Interface;
 import de.se.tinf11b3.breakdown.client.vector.VectorOperations;
 
 public class Kollisionserkennung {
 
 	/**
 	 * Überprüft, ob eine Kollision mit einem Block stattgefunden hat
+	 * @param app 
 	 */
-	public static ArrayList<Block> checkBlockCollision(ArrayList<Block> bloecke, Ball ball) {
+	public static ArrayList<Block> checkBlockCollision(ArrayList<Block> bloecke, Ball ball, Widget_GUI_Interface app) {
 		for(int i = 0; i < bloecke.size(); i++) {
 			Block tmp = bloecke.get(i);
 			Vector2 position = new Vector2(tmp.getX(), tmp.getY());
@@ -106,7 +108,7 @@ public class Kollisionserkennung {
 	
 	
 	
-	public static DirectionVector checkPaddleCollision(Paddle paddle, Ball ball) {
+	public static DirectionVector checkPaddleCollision(Paddle paddle, Ball ball, int x_direction, int y_direction, Widget_GUI_Interface app) {
 
 		Vector2 position = new Vector2(paddle.getX() - paddle.getSize() / 2, paddle.getY());
 		double width = paddle.getSize();
@@ -115,14 +117,18 @@ public class Kollisionserkennung {
 		Rectangle rec = new Rectangle(position, width, height);
 		Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
 		boolean hit = RectangleCircleKollision(rec, circ).isCollided();
+		Vector2 collisionVec = RectangleCircleKollision(rec, circ).getCollisionPoint();
 
+		
 		// Reached Paddle
 		if(hit) {
-//			app.pushToServer("HIT PADDLE");
+			app.pushToServer("HIT PADDLE");
+			app.pushToServer("X= "+collisionVec.getIntX());
+			app.pushToServer("Y= "+collisionVec.getIntY());
 		}
 
 		//TODO IMPLEMENT
-		return new DirectionVector(0, 0);
+		return new DirectionVector(x_direction, y_direction);
 		
 	}
 	
@@ -130,7 +136,7 @@ public class Kollisionserkennung {
 	
 	
 	
-	public static DirectionVector checkFrameCollision(Ball ball, int x_direction, int y_direction) {
+	public static DirectionVector checkFrameCollision(Ball ball, int x_direction, int y_direction, Widget_GUI_Interface app) {
 		// Check Y-Rand Collision
 		if((ball.getY() <= 15) || (ball.getY() >= 475)) {
 			y_direction *= -1;

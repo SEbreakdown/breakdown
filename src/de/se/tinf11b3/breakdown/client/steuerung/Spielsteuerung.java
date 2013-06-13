@@ -51,13 +51,17 @@ public class Spielsteuerung implements ISteuerung {
 	private void checkCollision() {
 		
 		//RandKollision
-		DirectionVector direction = Kollisionserkennung.checkFrameCollision(ball, x_direction, y_direction);
+		DirectionVector direction = Kollisionserkennung.checkFrameCollision(ball, x_direction, y_direction, app);
 		x_direction = direction.getX_direction();
 		y_direction = direction.getY_direction();
 		
-		Kollisionserkennung.checkPaddleCollision(paddle, ball);
+		//Paddle Kollission
+		Kollisionserkennung.checkPaddleCollision(paddle, ball, x_direction, y_direction, app);
+		x_direction = direction.getX_direction();
+		y_direction = direction.getY_direction();
 		
-		 bloecke = Kollisionserkennung.checkBlockCollision(bloecke, ball);
+		//Kollision mit Blöcken
+		bloecke = Kollisionserkennung.checkBlockCollision(bloecke, ball, app);
 	}
 
 
