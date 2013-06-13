@@ -1,0 +1,121 @@
+package com.example.tests;
+
+import com.thoughtworks.selenium.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.regex.Pattern;
+
+public class Schwierigkeit_Waehlen {
+	private Selenium selenium;
+
+	@Before
+	public void setUp() throws Exception {
+		selenium = new DefaultSelenium("localhost", 4444, "*chrome", "http://10.3.15.124:9090/");
+		selenium.start();
+	}
+
+	@Test
+	public void testSchwierigkeit_Waehlen() throws Exception {
+		selenium.open("/Breakdown");				//Seite aufrufen
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//Warte bis SpielStartenButton geladen
+			try { if (selenium.isElementPresent("css=span.v-button-caption")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+
+		selenium.click("css=span.v-button-caption");		//Spiel Starten klicken
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//Warten bis Leicht geladen
+			try { if (selenium.isElementPresent("css=span.v-button-wrap")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//Warten bis MIttelbutton geladen
+			try { if (selenium.isElementPresent("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[3]/div/div/span")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {			//Warte bis SchwerBUtton geladen
+			if (second >= 60) fail("timeout");
+			try { if (selenium.isElementPresent("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[2]/div/div/span")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+
+		verifyTrue(selenium.isTextPresent("Leicht"));		//Gibt es Leichtbutton?
+		verifyTrue(selenium.isTextPresent("Mittel"));		//Gibt es Mittelbutton?
+		verifyTrue(selenium.isTextPresent("Schwer"));		//Gibt es Schwerbutton?
+		selenium.click("css=span.v-button-wrap");
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//Warte bis Spielcanvas geladen
+			try { if (selenium.isElementPresent("css=canvas")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+
+		verifyTrue(selenium.isElementPresent("css=canvas"));	//Spielcanvas vorhanden?
+
+
+//BUTTON MITTEL
+
+
+
+		selenium.open("/Breakdown");				//Seite neu laden
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//warten bis spielstartenbutton geladen
+			try { if (selenium.isElementPresent("css=span.v-button-caption")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+
+		selenium.click("css=span.v-button-caption");		//spielstarten klicken
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//Warten bis mittelbutton present
+			try { if (selenium.isElementPresent("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[2]/div/div/span")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+									//Mittel Button klicken
+		selenium.click("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[2]/div/div/span");
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//Warten bis Spielcanvas vorhanden
+			try { if (selenium.isElementPresent("css=canvas")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+
+		verifyTrue(selenium.isElementPresent("css=canvas"));	//GIbt es ein Canvas?
+
+
+//Schwer BUtton
+
+
+
+		selenium.open("/Breakdown");				//Seite neu laden
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//warten bis spielstartenbutton geladen
+			try { if (selenium.isElementPresent("css=span.v-button-caption")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+		selenium.click("css=span.v-button-caption");		//Spielstarten klicken
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//Warten bis SChwer Button geladen
+			try { if (selenium.isElementPresent("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[3]/div/div/span")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+	
+		//SChwer bUtton klicken
+		selenium.click("//div[@id='Breakdown-106497537']/div/div[2]/div/div/div/div/div/div/div[3]/div/div/span");
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");	//Warten bis Canvas geladen
+			try { if (selenium.isElementPresent("css=canvas")) break; } catch (Exception e) {}
+			Thread.sleep(1000);
+		}
+		
+		//Canvas vorhanden
+		verifyTrue(selenium.isElementPresent("css=canvas"));
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		selenium.stop();
+	}
+}
