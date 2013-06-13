@@ -3,7 +3,7 @@ package de.se.tinf11b3.breakdown.client.collision;
 import gwt.g2d.client.math.Vector2;
 
 /**
- * Stellt ein Kollisionsergenis dar
+ * Stellt ein Kollisionsereignis dar
  * @author michael
  *
  */

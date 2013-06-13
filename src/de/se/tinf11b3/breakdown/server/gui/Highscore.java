@@ -45,8 +45,7 @@ public class Highscore extends CustomComponent {
 	private ArrayList<String> arrayListName;
 	private String zeile;
 	
-	private String dateiname= "/highscore.txt";
-	
+	private String dateiname= "highscore.txt";
 	
 	/**
 	 * The constructor should first build the main layout, set the
@@ -60,7 +59,7 @@ public class Highscore extends CustomComponent {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		
-		
+		    
 		button_hauptmenue.addListener(new ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				getWindow().setContent(hauptmenue);
