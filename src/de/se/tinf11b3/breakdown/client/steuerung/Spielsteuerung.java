@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 
 import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
+import de.se.tinf11b3.breakdown.client.collision.Kollisionserkennung;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;

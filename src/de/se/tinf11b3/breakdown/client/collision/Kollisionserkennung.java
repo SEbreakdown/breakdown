@@ -1,14 +1,14 @@
-package de.se.tinf11b3.breakdown.client.steuerung;
+package de.se.tinf11b3.breakdown.client.collision;
 
 import java.util.ArrayList;
 
 import gwt.g2d.client.math.Circle;
 import gwt.g2d.client.math.Rectangle;
 import gwt.g2d.client.math.Vector2;
-import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
+import de.se.tinf11b3.breakdown.client.steuerung.DirectionVector;
 import de.se.tinf11b3.breakdown.client.ui.Widget_GUI_Interface;
 import de.se.tinf11b3.breakdown.client.vector.VectorOperations;
 
@@ -122,9 +122,22 @@ public class Kollisionserkennung {
 		
 		// Reached Paddle
 		if(hit) {
+			
+			double deltaX = (paddle.getX()+paddle.getSize()/2) / 6;
+			
+//			for(int i=0; i<)
+			
+			
 			app.pushToServer("HIT PADDLE");
-			app.pushToServer("X= "+collisionVec.getIntX());
-			app.pushToServer("Y= "+collisionVec.getIntY());
+//			app.pushToServer("Paddle.X= "+collisionVec.getIntX());
+//			app.pushToServer("Paddle.Y= "+collisionVec.getIntY());
+			app.pushToServer("Paddle.X= "+paddle.getX());
+			app.pushToServer("Paddle.Y= "+paddle.getY());
+			app.pushToServer("Ball.X= "+ball.getX());
+			app.pushToServer("Ball.Y= "+ball.getY());
+			
+			
+			
 		}
 
 		//TODO IMPLEMENT
