@@ -16,7 +16,8 @@ public class Kollisionserkennung {
 
 	/**
 	 * Überprüft, ob eine Kollision mit einem Block stattgefunden hat
-	 * @param app 
+	 * 
+	 * @param app
 	 */
 	public static ArrayList<Block> checkBlockCollision(ArrayList<Block> bloecke, Ball ball, Widget_GUI_Interface app) {
 		for(int i = 0; i < bloecke.size(); i++) {
@@ -33,7 +34,7 @@ public class Kollisionserkennung {
 				bloecke.remove(tmp);
 			}
 		}
-		
+
 		return bloecke;
 	}
 
@@ -102,12 +103,7 @@ public class Kollisionserkennung {
 			t = 1;
 		return VectorOperations.vec_plus_vec(linestart, VectorOperations.vec_mal_scalar(a, t));
 	}
-	
-	
-	
-	
-	
-	
+
 	public static DirectionVector checkPaddleCollision(Paddle paddle, Ball ball, int x_direction, int y_direction, Widget_GUI_Interface app) {
 
 		Vector2 position = new Vector2(paddle.getX() - paddle.getSize() / 2, paddle.getY());
@@ -119,36 +115,110 @@ public class Kollisionserkennung {
 		boolean hit = RectangleCircleKollision(rec, circ).isCollided();
 		Vector2 collisionVec = RectangleCircleKollision(rec, circ).getCollisionPoint();
 
-		
 		// Reached Paddle
 		if(hit) {
+
+			double deltaX = (paddle.getSize() / 2) / 6;
+
+			double bereich_anfang = paddle.getX();
+			double bereich_ende;
+
+			char bereich = 'r';
 			
-			double deltaX = (paddle.getX()+paddle.getSize()/2) / 6;
+			//Ball rechts oder links?
+			if(ball.getX() >= paddle.getX()) {
+				bereich = 'r';
+			}
+			else {
+				bereich = 'l';
+			}
 			
-//			for(int i=0; i<)
 			
-			
+			for(int i = 1; i < 7; i++) {
+
+				// app.pushToServer("Bereich["+i+"].Anfang="+bereich_anfang);
+				// app.pushToServer("Bereich["+i+"].Ende="+bereich_ende);
+
+				// TODO RECHTS ODER LINKS?
+				if(bereich == 'r') {
+					bereich_ende = bereich_anfang + deltaX;
+				}
+				else {
+					bereich_ende = bereich_anfang - deltaX;
+				}
+
+				// Kollision in Bereich
+				if(Kollisionserkennung.punktInBereich(ball.getX(), bereich_anfang, bereich_ende)) {
+					app.pushToServer("Bereich " + i+" "+bereich);
+					switch(i) {
+						case 1:
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+						case 4:
+							break;
+						case 5:
+							break;
+						case 6:
+							break;
+						default:
+							break;
+					}
+
+					break;
+				}
+
+				
+				// Anfang verschieben
+				if(bereich == 'r') {
+					bereich_anfang = bereich_anfang += deltaX;
+				}
+				else {
+					bereich_anfang = bereich_anfang -= deltaX;
+				}
+			}
+
 			app.pushToServer("HIT PADDLE");
-//			app.pushToServer("Paddle.X= "+collisionVec.getIntX());
-//			app.pushToServer("Paddle.Y= "+collisionVec.getIntY());
-			app.pushToServer("Paddle.X= "+paddle.getX());
-			app.pushToServer("Paddle.Y= "+paddle.getY());
-			app.pushToServer("Ball.X= "+ball.getX());
-			app.pushToServer("Ball.Y= "+ball.getY());
-			
-			
-			
+			// app.pushToServer("Paddle.X= " + paddle.getX());
+			// app.pushToServer("Paddle.Y= " + paddle.getY());
+			// app.pushToServer("Ball.X= " + ball.getX());
+			// app.pushToServer("Ball.Y= " + ball.getY());
+
 		}
 
-		//TODO IMPLEMENT
+		// TODO IMPLEMENT
 		return new DirectionVector(x_direction, y_direction);
-		
+
 	}
-	
-	
-	
-	
-	
+
+	/**
+	 * Liefert True, falls der übergebene Punkt innerhalb des Wertebereichs
+	 * liegt sonst False
+	 * 
+	 * @param x
+	 * @param bereich_anfang
+	 * @return
+	 */
+	public static boolean punktInBereich(int x, double bereich_anfang, double bereich_ende) {
+
+		// Falls negativ
+		if(bereich_anfang > bereich_ende) {
+			double tmp = bereich_anfang;
+			bereich_anfang = bereich_ende;
+			bereich_ende = tmp;
+		}
+
+		if(x >= bereich_anfang && x <= bereich_ende) {
+			return true;
+		}
+		else {
+			return false;
+		}
+
+	}
+
 	public static DirectionVector checkFrameCollision(Ball ball, int x_direction, int y_direction, Widget_GUI_Interface app) {
 		// Check Y-Rand Collision
 		if((ball.getY() <= 15) || (ball.getY() >= 475)) {
@@ -159,7 +229,7 @@ public class Kollisionserkennung {
 		if((ball.getX() <= 0) || (ball.getX() >= 495)) {
 			x_direction *= -1;
 		}
-		
+
 		return new DirectionVector(x_direction, y_direction);
 	}
 
