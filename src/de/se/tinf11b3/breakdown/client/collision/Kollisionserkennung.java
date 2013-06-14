@@ -16,10 +16,14 @@ public class Kollisionserkennung {
 
 	/**
 	 * Überprüft, ob eine Kollision mit einem Block stattgefunden hat
+	 * @param y_direction 
+	 * @param x_direction 
 	 * 
 	 * @param app
 	 */
-	public static ArrayList<Block> checkBlockCollision(ArrayList<Block> bloecke, Ball ball, Widget_GUI_Interface app) {
+	public static Blockkollision checkBlockCollision(ArrayList<Block> bloecke, Ball ball, int x_direction, int y_direction, Widget_GUI_Interface app) {
+		boolean hit=false;
+		
 		for(int i = 0; i < bloecke.size(); i++) {
 			Block tmp = bloecke.get(i);
 			Vector2 position = new Vector2(tmp.getX(), tmp.getY());
@@ -28,14 +32,15 @@ public class Kollisionserkennung {
 
 			Rectangle rec = new Rectangle(position, width, height);
 			Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
-			boolean hit = RectangleCircleKollision(rec, circ).isCollided();
+			hit = RectangleCircleKollision(rec, circ).isCollided();
 
 			if(hit) {
 				bloecke.remove(tmp);
+				return new Blockkollision(new DirectionVector(x_direction, y_direction*(-1)), bloecke, hit);
 			}
 		}
-
-		return bloecke;
+		
+		return new Blockkollision(new DirectionVector(x_direction, y_direction), bloecke, false);		
 	}
 
 	// Gibt zurück, ob eine Kollision stattfand und wenn ja, wo, und wie lang
@@ -149,7 +154,7 @@ public class Kollisionserkennung {
 
 				// Kollision in Bereich
 				if(Kollisionserkennung.punktInBereich(ball.getX(), bereich_anfang, bereich_ende)) {
-					app.pushToServer("Bereich " + i+" "+bereich);
+//					app.pushToServer("Bereich " + i+" "+bereich);
 					switch(i) {
 						case 1:
 							
@@ -208,7 +213,7 @@ public class Kollisionserkennung {
 				x_direction *= -1;
 			}
 			
-			app.pushToServer("HIT PADDLE");
+//			app.pushToServer("HIT PADDLE");
 			// app.pushToServer("Paddle.X= " + paddle.getX());
 			// app.pushToServer("Paddle.Y= " + paddle.getY());
 			// app.pushToServer("Ball.X= " + ball.getX());

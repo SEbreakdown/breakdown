@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 
+import de.se.tinf11b3.breakdown.client.collision.Blockkollision;
 import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
 import de.se.tinf11b3.breakdown.client.collision.Kollisionserkennung;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
@@ -62,7 +63,13 @@ public class Spielsteuerung implements ISteuerung {
 		y_direction = direction.getY_direction();
 		
 		//Kollision mit Blöcken
-		bloecke = Kollisionserkennung.checkBlockCollision(bloecke, ball, app);
+		Blockkollision blockKoll = Kollisionserkennung.checkBlockCollision(bloecke, ball, x_direction, y_direction, app);
+		if(blockKoll.isCollided()){
+			bloecke = blockKoll.getBloecke();
+			x_direction = blockKoll.getDirection().getX_direction();
+			y_direction = blockKoll.getDirection().getY_direction();
+		}
+		
 	}
 
 
