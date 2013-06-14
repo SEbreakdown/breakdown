@@ -31,6 +31,7 @@ public class DateiReader {
 		this.leseZeileAusDatei();
 	}
 
+	/*
 	public void openFile(File pLexicon) {
 		try {
 			FileReader filereader = new FileReader(pLexicon);
@@ -50,6 +51,7 @@ public class DateiReader {
 			ex.printStackTrace();
 		}
 	}
+	*/
 
 	private void leseZeileAusDatei() {
 		try {
