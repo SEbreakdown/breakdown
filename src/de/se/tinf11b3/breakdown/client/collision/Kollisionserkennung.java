@@ -152,16 +152,40 @@ public class Kollisionserkennung {
 					app.pushToServer("Bereich " + i+" "+bereich);
 					switch(i) {
 						case 1:
+							
+							x_direction = 1;
+							y_direction = -7;
+							
 							break;
 						case 2:
+							
+							x_direction = 3;
+							y_direction = -6;
+							
 							break;
 						case 3:
+							
+							x_direction = 4;
+							y_direction = -6;
+							
 							break;
 						case 4:
+							
+							x_direction = 5;
+							y_direction = -5;
+							
 							break;
 						case 5:
+							
+							x_direction = 6;
+							y_direction = -3;
+							
 							break;
 						case 6:
+							
+							x_direction = 6;
+							y_direction = -5;
+							
 							break;
 						default:
 							break;
@@ -180,6 +204,10 @@ public class Kollisionserkennung {
 				}
 			}
 
+			if(bereich == 'l'){
+				x_direction *= -1;
+			}
+			
 			app.pushToServer("HIT PADDLE");
 			// app.pushToServer("Paddle.X= " + paddle.getX());
 			// app.pushToServer("Paddle.Y= " + paddle.getY());

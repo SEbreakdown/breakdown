@@ -57,7 +57,7 @@ public class Spielsteuerung implements ISteuerung {
 		y_direction = direction.getY_direction();
 		
 		//Paddle Kollission
-		Kollisionserkennung.checkPaddleCollision(paddle, ball, x_direction, y_direction, app);
+		direction = Kollisionserkennung.checkPaddleCollision(paddle, ball, x_direction, y_direction, app);
 		x_direction = direction.getX_direction();
 		y_direction = direction.getY_direction();
 		
@@ -111,7 +111,7 @@ public class Spielsteuerung implements ISteuerung {
 			gameStarted = true;
 			
 			//FPS=60
-			FpsTimer timer = new FpsTimer(30) {
+			FpsTimer timer = new FpsTimer(60) {
 				@Override
 				public void update() {
 
