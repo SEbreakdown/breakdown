@@ -109,8 +109,9 @@ public class Spielsteuerung implements ISteuerung {
 		if(gameStarted == false) {
 
 			gameStarted = true;
-
-			FpsTimer timer = new FpsTimer(60) {
+			
+			//FPS=60
+			FpsTimer timer = new FpsTimer(30) {
 				@Override
 				public void update() {
 
