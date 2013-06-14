@@ -35,7 +35,14 @@ public class Kollisionserkennung {
 			hit = RectangleCircleKollision(rec, circ).isCollided();
 
 			if(hit) {
-				bloecke.remove(tmp);
+				
+				if(tmp.getHitcount() == 0){
+					bloecke.remove(tmp);
+				}
+				else{
+					tmp.setHitcount(tmp.getHitcount()-1);
+				}
+				
 				return new Blockkollision(new DirectionVector(x_direction, y_direction*(-1)), bloecke, hit);
 			}
 		}

@@ -10,6 +10,7 @@ public class Ball extends Gameobject {
 	private int radius;
 	private DirectShapeRenderer shapeRenderer;
 
+
 	/**
 	 * Init with Values
 	 * 
@@ -31,6 +32,8 @@ public class Ball extends Gameobject {
 		this.radius = radius;
 	}
 
+
+	
 	@Override
 	public void drawObject(Surface surface) {
 

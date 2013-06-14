@@ -84,7 +84,7 @@ public class Spielsteuerung implements ISteuerung {
 		int y = 10;
 
 		for(int i = 0; i < 15; i++) {
-			bloecke.add(new Block(x, y, KnownColor.RED, new Vector2(80, 30)));
+			bloecke.add(new Block(x, y, KnownColor.RED, new Vector2(80, 30), 3));
 			x += 90;
 			if((i + 1) % 5 == 0) {
 				y += 50;
