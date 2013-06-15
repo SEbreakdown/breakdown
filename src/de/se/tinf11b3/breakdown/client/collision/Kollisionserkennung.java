@@ -37,11 +37,18 @@ public class Kollisionserkennung {
 			if(hit) {
 				
 				if(tmp.getHitcount() == 0){
-					bloecke.remove(tmp);
+					if(!tmp.isCollided()){
+						bloecke.remove(tmp);
+					}
+					
 				}
 				else{
-					tmp.setHitcount(tmp.getHitcount()-1);
+					if(!tmp.isCollided()){
+						tmp.setHitcount(tmp.getHitcount()-1);
+					}
 				}
+				
+				tmp.setCollided(true);
 				
 				return new Blockkollision(new DirectionVector(x_direction, y_direction*(-1)), bloecke, hit);
 			}
@@ -116,7 +123,7 @@ public class Kollisionserkennung {
 		return VectorOperations.vec_plus_vec(linestart, VectorOperations.vec_mal_scalar(a, t));
 	}
 
-	public static DirectionVector checkPaddleCollision(Paddle paddle, Ball ball, int x_direction, int y_direction, Widget_GUI_Interface app) {
+	public static DirectionVector checkPaddleCollision(Paddle paddle, Ball ball, ArrayList<Block> bloecke, int x_direction, int y_direction, Widget_GUI_Interface app) {
 
 		Vector2 position = new Vector2(paddle.getX() - paddle.getSize() / 2, paddle.getY());
 		double width = paddle.getSize();
@@ -130,6 +137,13 @@ public class Kollisionserkennung {
 		// Reached Paddle
 		if(hit) {
 
+			//Bloecke collisionen zuruecksetzen -> BUG: ball geht in block und
+			//dieser verschwindet sofort, da zu viele kollisionen festgestellt werden
+			for(Block block : bloecke) {
+				block.setCollided(false);
+			}
+			
+			
 			double deltaX = (paddle.getSize() / 2) / 6;
 
 			double bereich_anfang = paddle.getX();

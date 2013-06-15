@@ -11,7 +11,9 @@ public class Block extends Gameobject {
 
 	private Vector2 size;
 	private int hitcount = 0;
-
+	private boolean collided = false;
+	
+	
 	/**
 	 * Init with given Values
 	 * 
@@ -58,7 +60,7 @@ public class Block extends Gameobject {
 				this.color = KnownColor.GREEN;
 				break;
 			case 2:
-				this.color = KnownColor.DARK_CYAN;
+				this.color = KnownColor.YELLOW;
 				break;
 			case 3:
 				this.color = KnownColor.DARK_VIOLET;
@@ -72,4 +74,12 @@ public class Block extends Gameobject {
 		this.hitcount = hitcount;
 	}
 
+	
+	public boolean isCollided() {
+		return collided;
+	}
+	
+	public void setCollided(boolean collided) {
+		this.collided = collided;
+	}
 }

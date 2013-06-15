@@ -58,7 +58,7 @@ public class Spielsteuerung implements ISteuerung {
 		y_direction = direction.getY_direction();
 		
 		//Paddle Kollission
-		direction = Kollisionserkennung.checkPaddleCollision(paddle, ball, x_direction, y_direction, app);
+		direction = Kollisionserkennung.checkPaddleCollision(paddle, ball, bloecke, x_direction, y_direction, app);
 		x_direction = direction.getX_direction();
 		y_direction = direction.getY_direction();
 		
