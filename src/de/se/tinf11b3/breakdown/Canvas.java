@@ -17,12 +17,16 @@ public class Canvas extends AbstractComponent {
 	private String message = "Click here.";
 	private int clicks = 0;
 	private String debug_text = "DEBUG:";
+	private int leben = 0;
 
+	private boolean gameOver = false;
+	
 	private Spielverwaltung spielverwaltung;
 	
 	
 	public Canvas(Spielverwaltung spielverwaltung) {
 		this.spielverwaltung = spielverwaltung;
+		this.leben = spielverwaltung.getAnzLeben();
 	}	
 	
 	
@@ -34,6 +38,10 @@ public class Canvas extends AbstractComponent {
 		// These attributes can be read in updateFromUIDL in the widget.
 		target.addAttribute("clicks", clicks);
 		target.addAttribute("message", message);
+		target.addAttribute("leben", leben);
+
+		target.addAttribute("gameover", gameOver);
+		
 		
 		// We could also set variables in which values can be returned
 		// but declaring variables here is not required
@@ -54,6 +62,21 @@ public class Canvas extends AbstractComponent {
 		if(variables.containsKey("debug")) {
 			System.out.println(variables.get("debug"));
 		}
+		
+		if(variables.containsKey("leben")) {
+			System.out.println("LEBEN VERLOREN");
+			
+			//Keine Leben mehr?
+			if(spielverwaltung.erniedrigeLeben() == true){
+				System.out.println("GAME OVER");
+				gameOver = true;
+				requestRepaint();
+			}
+			
+			
+		}
+		
+		
 //		
 		
 		if(variables.containsKey("click")) {

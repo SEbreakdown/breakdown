@@ -14,4 +14,9 @@ public interface ISteuerung {
 
 	public void requestRepaintGameObjects();
 
+	
+	public void lebenVerloren();
+	
+	public void gameOver();
+	
 }

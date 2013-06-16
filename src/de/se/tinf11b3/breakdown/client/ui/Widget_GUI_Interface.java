@@ -19,5 +19,9 @@ public interface Widget_GUI_Interface {
 	public void drawPaddle(Paddle paddle);
 
 	public void pushToServer(String message);
+	
+	public void erniedrigeLeben();
+	
+	
 
 }

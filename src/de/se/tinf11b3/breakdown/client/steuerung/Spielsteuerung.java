@@ -29,7 +29,11 @@ public class Spielsteuerung implements ISteuerung {
 	private ArrayList<Block> bloecke = new ArrayList<Block>();
 	private int x_direction =  5, y_direction = -5;
 	private Widget_GUI_Interface app;
-
+	private FpsTimer timer;
+	
+	private boolean gameOver = false;
+	
+	
 	public Spielsteuerung(final Widget_GUI_Interface app) {
 		this.app = app;
 
@@ -135,14 +139,13 @@ public class Spielsteuerung implements ISteuerung {
 	}
 
 	public void mouseDown(MouseDownEvent event) {
-		app.pushToServer("Hello, this is Client :P");
-
-		if(gameStarted == false) {
+		
+		if(gameStarted == false && !gameOver) {
 
 			gameStarted = true;
 			
 			//FPS=60
-			FpsTimer timer = new FpsTimer(60) {
+			timer = new FpsTimer(60) {
 				@Override
 				public void update() {
 
@@ -164,4 +167,22 @@ public class Spielsteuerung implements ISteuerung {
 		app.drawAllGameObjects(ball, paddle, bloecke);
 	}
 
+	
+	public void lebenVerloren(){
+		timer.cancel();
+		gameStarted = false;
+		
+		// Init Ball
+		ball.setPosition(250, 465);
+		paddle.setPosition(250, 480);
+		
+		requestRepaintGameObjects();
+		
+	}
+
+	public void gameOver() {
+		gameOver = true;
+	}
+	
+	
 }

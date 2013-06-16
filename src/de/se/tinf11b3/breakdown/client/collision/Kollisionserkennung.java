@@ -300,6 +300,11 @@ public class Kollisionserkennung {
 		if((ball.getY() <= 15) || (ball.getY() >= 475)) {
 			y_direction *= -1;
 		}
+		
+		if(ball.getY() >= 475){
+			app.erniedrigeLeben();
+		}
+		
 
 		// Check X-Rand Collision
 		if((ball.getX() <= 0) || (ball.getX() >= 495)) {

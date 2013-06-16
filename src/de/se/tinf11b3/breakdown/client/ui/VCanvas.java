@@ -78,6 +78,9 @@ public class VCanvas extends Composite implements Paintable, Field,
 	// Interface für diese GUI
 	private ISteuerung steuerungsInterface = (ISteuerung) steuerung;
 
+	
+	private boolean lebenVerloren = false;
+	
 	/**
 	 * Model: View
 	 * 
@@ -87,6 +90,7 @@ public class VCanvas extends Composite implements Paintable, Field,
 
 		surface.fillBackground(BACKGROUNDCOLOR);
 		flowPanel.add(surface);
+		
 
 		/**
 		 * 
@@ -153,17 +157,39 @@ public class VCanvas extends Composite implements Paintable, Field,
 		if(client != null)
 			client.updateVariable(id, "debug", message, true);
 	}
+	
+	
+	public void erniedrigeLeben() {
+		if(client != null){
+			client.updateVariable(id, "leben", lebenVerloren, true);
+			steuerungsInterface.lebenVerloren();
+		}
+	}
+	
+	
+	
 
 	/**
 	 * Get updated Variables from Server
 	 */
 	public void updateFromUIDL(final UIDL uidl, ApplicationConnection client) {
-		this.client = client;
-		id = uidl.getId();
-
 		if(client.updateComponent(this, uidl, true)) {
 			return;
 		}
+		
+		this.client = client;
+
+		id = uidl.getId();
+		
+		boolean gameover = uidl.getBooleanAttribute("gameover");
+		
+
+		if(gameover){
+			steuerungsInterface.gameOver();
+		}
+		
+		
+		
 	}
 
 	/**
