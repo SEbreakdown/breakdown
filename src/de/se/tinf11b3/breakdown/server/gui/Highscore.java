@@ -3,6 +3,7 @@ package de.se.tinf11b3.breakdown.server.gui;
 import gherkin.deps.net.iharder.Base64.OutputStream;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileOutputStream;
 import java.io.BufferedWriter;
@@ -153,9 +154,8 @@ public class Highscore extends CustomComponent {
 	//erstellt Arraylist (mit den Zeilen)
 	public void openfile(){
 		try {
-			InputStream stream = this.getClass().getResourceAsStream(dateiname);
-			Reader filereader = new InputStreamReader(stream, "ISO-8859-1");
-
+			FileInputStream fis = new FileInputStream("/tmp/highscore.txt");
+			Reader filereader = new InputStreamReader(fis, "UTF-8"); 
 			
 			BufferedReader reader = new BufferedReader(filereader);
 			zeile = null;
