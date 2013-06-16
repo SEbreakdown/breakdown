@@ -12,12 +12,14 @@ public class CollisionResult {
 	private boolean isCollided;
 	private Vector2 collisionPoint;
 	private double distanceSq;
-
-	public CollisionResult(boolean isCollided, Vector2 collisionPoint, double distanceSq) {
+	private Kollisionsseite seite;
+	
+	public CollisionResult(boolean isCollided, Vector2 collisionPoint, double distanceSq, Kollisionsseite seite) {
 		super();
 		this.isCollided = isCollided;
 		this.collisionPoint = collisionPoint;
 		this.distanceSq = distanceSq;
+		this.seite = seite;
 	}
 
 	public boolean isCollided() {
@@ -32,6 +34,10 @@ public class CollisionResult {
 		return distanceSq;
 	}
 
+	public Kollisionsseite getSeite() {
+		return seite;
+	}
+	
 }
 
 /*Vector2 PointLineDist(Vector2 point, Vector2 linestart, Vector2 lineend)

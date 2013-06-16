@@ -32,30 +32,51 @@ public class Kollisionserkennung {
 
 			Rectangle rec = new Rectangle(position, width, height);
 			Circle circ = new Circle(ball.getX(), ball.getY(), ball.getRadius());
-			hit = RectangleCircleKollision(rec, circ).isCollided();
 
+			CollisionResult result = RectangleCircleKollision(rec, circ);
+			hit = result.isCollided(); 
+			
 			if(hit) {
 				
 				if(tmp.getHitcount() == 0){
-					if(!tmp.isCollided()){
 						bloecke.remove(tmp);
-					}
-					
 				}
 				else{
-					if(!tmp.isCollided()){
 						tmp.setHitcount(tmp.getHitcount()-1);
-					}
 				}
 				
-				tmp.setCollided(true);
 				
-				return new Blockkollision(new DirectionVector(x_direction, y_direction*(-1)), bloecke, hit);
+				switch(result.getSeite()) {
+					case OBEN:
+						return new Blockkollision(new DirectionVector(x_direction, -Math.abs(y_direction), Kollisionsseite.OBEN), bloecke, hit);
+					case UNTEN:
+						return new Blockkollision(new DirectionVector(x_direction, Math.abs(y_direction), Kollisionsseite.UNTEN), bloecke, hit);
+					case LINKS:
+						return new Blockkollision(new DirectionVector(-Math.abs(x_direction), y_direction, Kollisionsseite.LINKS), bloecke, hit);
+					case RECHTS:
+						return new Blockkollision(new DirectionVector(Math.abs(x_direction), y_direction, Kollisionsseite.RECHTS), bloecke, hit);
+					default:
+						break;
+				}
+				
+				
+				return new Blockkollision(new DirectionVector(x_direction, y_direction*(-1), Kollisionsseite.OBEN), bloecke, hit);
+				
 			}
 		}
 		
-		return new Blockkollision(new DirectionVector(x_direction, y_direction), bloecke, false);		
+		return new Blockkollision(new DirectionVector(x_direction, y_direction, Kollisionsseite.NOKOLLISION), bloecke, false);		
 	}
+	
+	
+	private void makeDirectionNegative(int direction) {
+		
+		
+	}
+	
+	
+	
+	
 
 	// Gibt zurück, ob eine Kollision stattfand und wenn ja, wo, und wie lang
 	// der (minimale, quadratische) Abstand zum Rechteck ist.
@@ -72,7 +93,9 @@ public class Kollisionserkennung {
 
 		double minDistSq = 80000;
 		Vector2 basePoint = new Vector2(0, 0);
+		Kollisionsseite seite = Kollisionsseite.NOKOLLISION;
 
+		
 		// Seiten durchgehen, Schleife kann (bzw muss, je nachdem wie Rect
 		// aussieht) entrollt werden
 		Vector2 base = PointLineDist(circle.getCenter(), p1, p2);
@@ -80,6 +103,7 @@ public class Kollisionserkennung {
 			// Kürzerer Abstand, neu zuweisen.
 			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
+			seite = Kollisionsseite.OBEN;
 		}
 
 		base = PointLineDist(circle.getCenter(), p2, p3);
@@ -87,6 +111,7 @@ public class Kollisionserkennung {
 			// Kürzerer Abstand, neu zuweisen.
 			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
+			seite = Kollisionsseite.RECHTS;
 		}
 
 		base = PointLineDist(circle.getCenter(), p3, p4);
@@ -94,16 +119,18 @@ public class Kollisionserkennung {
 			// Kürzerer Abstand, neu zuweisen.
 			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
+			seite = Kollisionsseite.UNTEN;
 		}
 		base = PointLineDist(circle.getCenter(), p4, p1);
 		if(VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base)) < minDistSq) {
 			// Kürzerer Abstand, neu zuweisen.
 			minDistSq = VectorOperations.sqr_length(VectorOperations.vec_minus_vec(circle.getCenter(), base));
 			basePoint = base;
+			seite = Kollisionsseite.LINKS;
 		}
 
 		CollisionResult result = new CollisionResult(minDistSq < circle.getRadius()
-				* circle.getRadius(), basePoint, minDistSq);
+				* circle.getRadius(), basePoint, minDistSq, seite);
 
 		return result;
 	}
@@ -137,12 +164,7 @@ public class Kollisionserkennung {
 		// Reached Paddle
 		if(hit) {
 
-			//Bloecke collisionen zuruecksetzen -> BUG: ball geht in block und
-			//dieser verschwindet sofort, da zu viele kollisionen festgestellt werden
-			for(Block block : bloecke) {
-				block.setCollided(false);
-			}
-			
+			 
 			
 			double deltaX = (paddle.getSize() / 2) / 6;
 
@@ -243,7 +265,7 @@ public class Kollisionserkennung {
 		}
 
 		// TODO IMPLEMENT
-		return new DirectionVector(x_direction, y_direction);
+		return new DirectionVector(x_direction, y_direction,Kollisionsseite.NOKOLLISION);
 
 	}
 
@@ -284,7 +306,7 @@ public class Kollisionserkennung {
 			x_direction *= -1;
 		}
 
-		return new DirectionVector(x_direction, y_direction);
+		return new DirectionVector(x_direction, y_direction,Kollisionsseite.NOKOLLISION);
 	}
 
 }

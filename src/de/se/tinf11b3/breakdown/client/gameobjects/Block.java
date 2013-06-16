@@ -11,7 +11,6 @@ public class Block extends Gameobject {
 
 	private Vector2 size;
 	private int hitcount = 0;
-	private boolean collided = false;
 	
 	
 	/**
@@ -75,11 +74,5 @@ public class Block extends Gameobject {
 	}
 
 	
-	public boolean isCollided() {
-		return collided;
-	}
-	
-	public void setCollided(boolean collided) {
-		this.collided = collided;
-	}
+	 
 }

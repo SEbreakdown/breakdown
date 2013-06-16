@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.MouseUpEvent;
 import de.se.tinf11b3.breakdown.client.collision.Blockkollision;
 import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
 import de.se.tinf11b3.breakdown.client.collision.Kollisionserkennung;
+import de.se.tinf11b3.breakdown.client.collision.Kollisionsseite;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
 import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
@@ -68,6 +69,29 @@ public class Spielsteuerung implements ISteuerung {
 			bloecke = blockKoll.getBloecke();
 			x_direction = blockKoll.getDirection().getX_direction();
 			y_direction = blockKoll.getDirection().getY_direction();
+			
+			Kollisionsseite seite = blockKoll.getDirection().getSeite();
+			
+			//Ball ein wenig wegstupsen, damit er nicht öfter runterzaehl, als der Ball eigentlich getroffen hat
+			switch(seite) {
+				case OBEN:
+					ball.setPosition(ball.getX(), ball.getY() - 3);
+					break;
+				case UNTEN:
+					ball.setPosition(ball.getX(), ball.getY() + 3);
+					break;
+				case LINKS:
+					ball.setPosition(ball.getX() - 3, ball.getY());
+					break;
+				case RECHTS:
+					ball.setPosition(ball.getX() + 3, ball.getY());
+					break;
+					
+				default:
+					break;
+			}
+			
+			
 		}
 		
 	}
