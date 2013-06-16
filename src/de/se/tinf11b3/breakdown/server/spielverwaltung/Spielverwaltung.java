@@ -67,6 +67,7 @@ public class Spielverwaltung {
 	}
 	
 	public void showHighscoreWindow() {
+		hauptmenue.getHighscore().refreshScore();
 		mainWindow.setContent(hauptmenue.getHighscore());
 	}
 	

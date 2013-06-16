@@ -31,7 +31,9 @@ public class HighscoreReader {
 //		
 //	}
 	
-	
+	public String getDateiname() {
+		return dateiname;
+	}
 	
 	/**
 	 * Liest die Einträge aus einer TXT Datei aus und gibt alle Einträge als

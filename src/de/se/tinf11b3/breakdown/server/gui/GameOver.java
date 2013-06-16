@@ -11,6 +11,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 
+import de.se.tinf11b3.breakdown.server.highscore.HighscoreEntry;
 import de.se.tinf11b3.breakdown.server.spielverwaltung.Spielverwaltung;
 
 public class GameOver extends CustomComponent {
@@ -62,7 +63,9 @@ public class GameOver extends CustomComponent {
 			
 			public void buttonClick(ClickEvent event) {
 				
+				spielverwaltung.getHighscorehandler().addEntry(new HighscoreEntry(350, "Test"));
 				spielverwaltung.showHighscoreWindow();
+				
 			}
 		});
 		
