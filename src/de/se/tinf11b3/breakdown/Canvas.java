@@ -30,6 +30,12 @@ public class Canvas extends AbstractComponent {
 	}	
 	
 	
+	
+	public void neuesSpiel() {
+		gameOver = false;
+		requestRepaint();
+	}
+	
 	@Override
 	public void paintContent(PaintTarget target) throws PaintException {
 		super.paintContent(target);

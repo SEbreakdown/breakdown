@@ -10,7 +10,7 @@ public class Highscorehandler {
 	/**
 	 * Fügt einen neuen Eintrag zur Highscoreliste hinzu
 	 * 
-	 * Nur die besten 10 werden gespeichert
+	 * Nur die besten 5 werden gespeichert
 	 * 
 	 * 
 	 * @param entry

@@ -135,4 +135,12 @@ public class Hauptmenue extends CustomComponent {
 		return verticalLayout_1;
 	}
 
+	public Schwierigkeitsgrad getSchwierigkeitsgrad() {
+		return schwierigkeitsgrad;
+	}
+	
+	public Highscore getHighscore() {
+		return highscore;
+	}
+	
 }
