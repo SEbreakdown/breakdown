@@ -5,9 +5,6 @@ import java.util.ArrayList;
 public class Highscorehandler {
 
 	private HighscoreReader reader = new HighscoreReader();
-	private ArrayList<HighscoreEntry> entrylist = new ArrayList<HighscoreEntry>();
-	
-
 	
 	
 	/**
@@ -19,15 +16,17 @@ public class Highscorehandler {
 	 * @param entry
 	 */
 	public void addEntry(HighscoreEntry entry){
-		//TODO	Speichere TOP 10
+		//TODO	Speichere TOP 5
 	}
+	
+	
 	
 	/**
 	 * Liefert alle Einträge zurück 
 	 * @return
 	 */
 	public ArrayList<HighscoreEntry> getEntrylist() {
-		return entrylist;
+		return reader.readEntriesFromFile();
 	}
 	
 	

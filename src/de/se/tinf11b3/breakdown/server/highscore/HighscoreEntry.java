@@ -6,6 +6,12 @@ public class HighscoreEntry {
 	private String name = "";
 	
 	
+	
+	
+	public HighscoreEntry(int score, String name) {
+		this.score = score;
+		this.name = name;
+	}
 	public int getScore() {
 		return score;
 	}

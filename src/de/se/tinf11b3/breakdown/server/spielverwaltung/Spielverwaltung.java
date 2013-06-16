@@ -31,7 +31,9 @@ public class Spielverwaltung {
 	}
 	
 	
-	
+	public Highscorehandler getHighscorehandler() {
+		return highscorehandler;
+	}
 	
 	public int getAnzLeben() {
 		return anzLeben;

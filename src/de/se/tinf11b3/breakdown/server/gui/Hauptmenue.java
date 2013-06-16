@@ -30,7 +30,7 @@ public class Hauptmenue extends CustomComponent {
 
 	private Schwierigkeitsgrad schwierigkeitsgrad;
 	private Hilfe hilfe = new Hilfe(this);
-	private Highscore highscore = new Highscore(this);
+	private Highscore highscore;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
@@ -44,7 +44,7 @@ public class Hauptmenue extends CustomComponent {
 	public Hauptmenue(Spielverwaltung spielverwaltung) {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
-		
+		highscore = new Highscore(this, spielverwaltung);
 		
 		schwierigkeitsgrad = new Schwierigkeitsgrad(this,spielverwaltung);
 
@@ -68,6 +68,7 @@ public class Hauptmenue extends CustomComponent {
 		button_highscore.addListener(new ClickListener() {
 
 			public void buttonClick(ClickEvent event) {
+				highscore.refreshScore();
 				getWindow().setContent(highscore);
 			}
 		});
