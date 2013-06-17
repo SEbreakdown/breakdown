@@ -40,11 +40,17 @@ public class Kollisionserkennung {
 				
 				if(tmp.getHitcount() == 0){
 						bloecke.remove(tmp);
+						
+						if(bloecke.isEmpty()){
+							app.gameOver();
+						}
+						
 				}
 				else{
 						tmp.setHitcount(tmp.getHitcount()-1);
 				}
-				
+
+				app.blockGetroffen();
 				
 				switch(result.getSeite()) {
 					case OBEN:

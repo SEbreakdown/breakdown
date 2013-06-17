@@ -44,6 +44,7 @@ import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
 import de.se.tinf11b3.breakdown.client.steuerung.ISteuerung;
 import de.se.tinf11b3.breakdown.client.steuerung.Spielsteuerung;
+import de.se.tinf11b3.breakdown.server.gui.GameOver;
 
 /**
  * Clientside Part of the Widget
@@ -80,6 +81,8 @@ public class VCanvas extends Composite implements Paintable, Field,
 
 	
 	private boolean lebenVerloren = false;
+	private boolean hitBlock = false;
+	
 	
 	/**
 	 * Model: View
@@ -167,8 +170,20 @@ public class VCanvas extends Composite implements Paintable, Field,
 	}
 	
 	
+	public void blockGetroffen() {
+		if(client != null){
+			client.updateVariable(id, "hit_block", hitBlock, true);
+		}
+	}
 	
+	
+	public void gameOver() {
+		if(client != null){
+			client.updateVariable(id, "gameover", true, true);
+		}
 
+	}
+	
 	/**
 	 * Get updated Variables from Server
 	 */

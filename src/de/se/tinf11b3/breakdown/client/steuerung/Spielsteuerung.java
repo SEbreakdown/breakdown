@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseUpEvent;
+import com.vaadin.data.validator.RegexpValidator;
 
 import de.se.tinf11b3.breakdown.client.collision.Blockkollision;
 import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
@@ -177,7 +178,6 @@ public class Spielsteuerung implements ISteuerung {
 		paddle.setPosition(250, 480);
 		
 		requestRepaintGameObjects();
-		
 	}
 
 	public void gameOver() {

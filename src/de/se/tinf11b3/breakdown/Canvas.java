@@ -20,6 +20,7 @@ public class Canvas extends AbstractComponent {
 	private int leben = 0;
 
 	private boolean gameOver = false;
+	private boolean hitBlock = false;
 	
 	private Spielverwaltung spielverwaltung;
 	
@@ -45,7 +46,7 @@ public class Canvas extends AbstractComponent {
 		target.addAttribute("clicks", clicks);
 		target.addAttribute("message", message);
 		target.addAttribute("leben", leben);
-
+		target.addAttribute("hit_block", hitBlock);
 		target.addAttribute("gameover", gameOver);
 		
 		
@@ -78,12 +79,17 @@ public class Canvas extends AbstractComponent {
 				gameOver = true;
 				requestRepaint();
 			}
-			
-			
+		}
+		
+		if(variables.containsKey("gameover")) {
+			spielverwaltung.gameOver();
 		}
 		
 		
-//		
+		if(variables.containsKey("hit_block")) {
+			spielverwaltung.erhoeheHighscoreUm(10);
+		}
+		
 		
 		if(variables.containsKey("click")) {
 

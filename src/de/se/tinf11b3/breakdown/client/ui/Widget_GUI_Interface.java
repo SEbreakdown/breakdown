@@ -22,6 +22,9 @@ public interface Widget_GUI_Interface {
 	
 	public void erniedrigeLeben();
 	
+	public void blockGetroffen();
+	
+	public void gameOver();
 	
 
 }
