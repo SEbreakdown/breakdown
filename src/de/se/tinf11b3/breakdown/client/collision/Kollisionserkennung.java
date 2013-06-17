@@ -42,6 +42,7 @@ public class Kollisionserkennung {
 						bloecke.remove(tmp);
 						
 						if(bloecke.isEmpty()){
+//							app.loadNextLevel();
 							app.gameOver();
 						}
 						
@@ -74,11 +75,6 @@ public class Kollisionserkennung {
 		return new Blockkollision(new DirectionVector(x_direction, y_direction, Kollisionsseite.NOKOLLISION), bloecke, false);		
 	}
 	
-	
-	private void makeDirectionNegative(int direction) {
-		
-		
-	}
 	
 	
 	
@@ -167,9 +163,9 @@ public class Kollisionserkennung {
 		boolean hit = RectangleCircleKollision(rec, circ).isCollided();
 		Vector2 collisionVec = RectangleCircleKollision(rec, circ).getCollisionPoint();
 
-		// Reached Paddle
-		if(hit) {
-
+		// Reached Paddle 
+		if(hit) {		
+			
 			 
 			
 			double deltaX = (paddle.getSize() / 2) / 6;
@@ -317,7 +313,7 @@ public class Kollisionserkennung {
 			x_direction *= -1;
 		}
 
-		return new DirectionVector(x_direction, y_direction,Kollisionsseite.NOKOLLISION);
+		return new DirectionVector(x_direction, y_direction, Kollisionsseite.NOKOLLISION);
 	}
 
 }

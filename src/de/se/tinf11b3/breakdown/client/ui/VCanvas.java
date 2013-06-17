@@ -220,4 +220,8 @@ public class VCanvas extends Composite implements Paintable, Field,
 	public void onChange(ChangeEvent event) {
 	}
 
+	public void loadNextLevel() {
+		steuerungsInterface.nextLevel();
+	}
+
 }

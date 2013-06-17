@@ -33,7 +33,7 @@ public class Spielsteuerung implements ISteuerung {
 	private FpsTimer timer;
 	
 	private boolean gameOver = false;
-	
+	private int level = 1;
 	
 	public Spielsteuerung(final Widget_GUI_Interface app) {
 		this.app = app;
@@ -45,7 +45,7 @@ public class Spielsteuerung implements ISteuerung {
 		ball = new Ball(250, 465, KnownColor.GREEN, 10);
 
 		// Init Blocks
-		initLevel();
+		initLevel_1();
 
 		// Draw them all
 		app.drawAllGameObjects(ball, paddle, bloecke);
@@ -107,13 +107,13 @@ public class Spielsteuerung implements ISteuerung {
 	 * 
 	 * @param surface
 	 */
-	private void initLevel() {
+	private void initLevel_1() {
 
-		int x = 30;
-		int y = 10;
+		int x = 30;	//30
+		int y = 30;	//10
 
 		for(int i = 0; i < 15; i++) {
-			bloecke.add(new Block(x, y, KnownColor.RED, new Vector2(80, 30), 3));
+			bloecke.add(new Block(x, y, KnownColor.RED, new Vector2(50, 20), 3));		//x=80,y=30
 			x += 90;
 			if((i + 1) % 5 == 0) {
 				y += 50;
@@ -121,6 +121,28 @@ public class Spielsteuerung implements ISteuerung {
 			}
 		}
 	}
+	
+	
+	
+	private void initLevel_2() {
+		int x_start = 30;
+		int x = x_start;	//30
+		int y_start = 30;
+		int y = y_start;	//10
+
+		for(int k=0;k<5;k++){
+			
+			for(int i = 0; i < 5-k; i++) {
+				bloecke.add(new Block(x, y, KnownColor.RED, new Vector2(50, 20), 3));		
+				x += 90;
+			}
+			y += 50;
+			x = x_start+50*(k+1);
+		}
+		
+	}
+	
+	
 
 	public void mouseMoved(MouseMoveEvent event) {
 		int mouseX = event.getX();
@@ -182,6 +204,19 @@ public class Spielsteuerung implements ISteuerung {
 
 	public void gameOver() {
 		gameOver = true;
+	}
+
+	public void nextLevel() {
+		level++;
+		if(level == 2){
+			initLevel_2();
+		}
+		else{
+			timer.cancel();
+			gameStarted = false;
+			requestRepaintGameObjects();
+		}
+		
 	}
 	
 	
