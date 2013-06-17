@@ -31,7 +31,9 @@ public class Highscorehandler {
 				entryPlaced = true;
 				tmp.add(entry);
 			}
-			tmp.add(highscoreList.get(i));
+			else{
+				tmp.add(highscoreList.get(i));
+			}
 		}
 
 		if(tmp.size() > 5){

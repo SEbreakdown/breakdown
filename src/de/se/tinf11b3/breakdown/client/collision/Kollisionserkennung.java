@@ -297,11 +297,11 @@ public class Kollisionserkennung {
 
 	public static DirectionVector checkFrameCollision(Ball ball, int x_direction, int y_direction, Widget_GUI_Interface app) {
 		// Check Y-Rand Collision
-		if((ball.getY() <= 15) || (ball.getY() >= 475)) {
+		if((ball.getY() <= 15)) {
 			y_direction *= -1;
 		}
 		
-		if(ball.getY() >= 475){
+		if(ball.getY() >= 480){
 			app.erniedrigeLeben();
 		}
 		
