@@ -12,7 +12,7 @@ public class Spielverwaltung {
 	private int anzLeben = 3;
 	private Window mainWindow;
 	private Hauptmenue hauptmenue;
-	private int highscore;
+	private int highscore=0;
 	private Schwierigkeitsgrad schwierigkeitsgrad = Schwierigkeitsgrad.LEICHT;
 	
 	
@@ -49,6 +49,17 @@ public class Spielverwaltung {
 			return false;
 		}
 	}
+	
+	
+	public void showHighscore() {
+		hauptmenue.getSchwierigkeitsgrad().getSpielfenster().refreshHighscore(highscore);
+	}
+	
+	public void erhoeheHighscoreUm(int wert){
+		highscore += wert;
+		showHighscore();
+	}
+	
 	
 	
 	

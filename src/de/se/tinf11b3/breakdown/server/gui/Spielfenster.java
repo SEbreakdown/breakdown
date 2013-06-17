@@ -44,7 +44,6 @@ public class Spielfenster extends CustomComponent{
 		buildMainLayout(spielverwaltung);
 		setCompositionRoot(mainLayout);
 
-		 
 		// TODO add user code here
 	}
 
@@ -144,9 +143,14 @@ private VerticalLayout buildVerticalLayout_1() {
 	label_5.setImmediate(false);
 	label_5.setWidth("-1px");
 	label_5.setHeight("-1px");
-	label_5.setValue("Label");
+	label_5.setValue("XXX");
 	verticalLayout_1.addComponent(label_5);
 	
 	return verticalLayout_1;
 }
+
+	public void refreshHighscore(int wert) {
+		this.label_5.setValue(wert);
+	}
+
 }
