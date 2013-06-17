@@ -38,6 +38,8 @@ public class Spielverwaltung {
 
 		anzLeben--;
 
+		hauptmenue.getSchwierigkeitsgrad().getSpielfenster().setLeben(anzLeben);
+		
 		if(anzLeben <= 0) {
 			gameOver();
 			return true;
@@ -74,6 +76,9 @@ public class Spielverwaltung {
 		highscore = 0;
 		showHighscore();
 		hauptmenue.getSchwierigkeitsgrad().getSpielfenster().getCanvas_1().neuesSpiel();
+		hauptmenue.getSchwierigkeitsgrad().getSpielfenster().refreshHighscore(highscore);
+		hauptmenue.getSchwierigkeitsgrad().getSpielfenster().setLeben(anzLeben);
+		
 	}
 
 	public Schwierigkeitsgrad getSchwierigkeitsgrad() {

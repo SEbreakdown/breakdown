@@ -8,6 +8,8 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
+import cucumber.annotation.lu.an;
+
 import de.se.tinf11b3.breakdown.Canvas;
 import de.se.tinf11b3.breakdown.server.spielverwaltung.Spielverwaltung;
 
@@ -151,6 +153,33 @@ private VerticalLayout buildVerticalLayout_1() {
 
 	public void refreshHighscore(int wert) {
 		this.label_5.setValue(wert);
+	}
+
+	public void setLeben(int anzahl) {
+		switch(anzahl) {
+			case 0:
+				label_1.setVisible(false);
+				label_2.setVisible(false);
+				label_3.setVisible(false);
+				break;
+			case 1:
+				label_1.setVisible(true);
+				label_2.setVisible(false);
+				label_3.setVisible(false);
+				break;
+			case 2:
+				label_1.setVisible(true);
+				label_2.setVisible(true);
+				label_3.setVisible(false);
+				break;
+			case 3:
+				label_1.setVisible(true);
+				label_2.setVisible(true);
+				label_3.setVisible(true);
+				break;
+			default:
+				break;
+		}
 	}
 
 }
