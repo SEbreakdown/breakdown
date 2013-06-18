@@ -16,6 +16,10 @@ public class Spielverwaltung {
 	private Schwierigkeitsgrad schwierigkeitsgrad = Schwierigkeitsgrad.LEICHT;
 	private Integer zeit = 0;
 	
+	public void setHighscore(int highscore) {
+		this.highscore = highscore;
+	}
+	
 	public Integer getZeit() {
 		return zeit;
 	}
