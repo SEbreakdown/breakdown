@@ -28,6 +28,7 @@ public interface Widget_GUI_Interface {
 	
 	public void loadNextLevel();
 	
+	public void sendTime();
 	
 
 }

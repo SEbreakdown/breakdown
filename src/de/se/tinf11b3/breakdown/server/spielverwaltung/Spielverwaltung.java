@@ -14,7 +14,16 @@ public class Spielverwaltung {
 	private Hauptmenue hauptmenue;
 	private int highscore = 0;
 	private Schwierigkeitsgrad schwierigkeitsgrad = Schwierigkeitsgrad.LEICHT;
-
+	private Integer zeit = 0;
+	
+	public Integer getZeit() {
+		return zeit;
+	}
+	
+	public void setZeit(Integer zeit) {
+		this.zeit = zeit;
+	}
+	
 	public enum Schwierigkeitsgrad {
 		LEICHT, MITTEL, SCHWER
 	}
@@ -51,6 +60,11 @@ public class Spielverwaltung {
 	
 	
 	public void gameOver() {
+		if(anzLeben != 0){
+			if(zeit == 0) zeit++;
+			Integer score = 500000 / zeit;
+			erhoeheHighscoreUm(score);
+		}
 		mainWindow.setContent(new GameOver(this, highscore));
 	}
 	

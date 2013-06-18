@@ -40,12 +40,6 @@ public class Kollisionserkennung {
 				
 				if(tmp.getHitcount() == 0){
 						bloecke.remove(tmp);
-						
-//						if(bloecke.isEmpty()){
-//							app.loadNextLevel();
-//							app.gameOver();
-//						}
-						
 				}
 				else{
 						tmp.setHitcount(tmp.getHitcount()-1);

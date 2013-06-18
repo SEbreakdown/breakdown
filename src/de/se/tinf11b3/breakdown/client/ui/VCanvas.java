@@ -179,8 +179,14 @@ public class VCanvas extends Composite implements Paintable, Field,
 		if(client != null){
 			client.updateVariable(id, "gameover", true, true);
 		}
-
 	}
+	
+	public void sendTime() {
+		if(client != null){
+			client.updateVariable(id, "time", steuerungsInterface.getTime(), true);
+		}
+	}
+	
 	
 	/**
 	 * Get updated Variables from Server
@@ -198,6 +204,7 @@ public class VCanvas extends Composite implements Paintable, Field,
 		
 
 		if(gameover){
+			sendTime();
 			steuerungsInterface.gameOver();
 		}
 		

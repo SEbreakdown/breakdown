@@ -22,4 +22,6 @@ public interface ISteuerung {
 	
 	public Integer getAnzahlBloecke();
 	
+	public Integer getTime();
+	
 }

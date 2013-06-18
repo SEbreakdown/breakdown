@@ -29,6 +29,9 @@ public class Spielsteuerung implements ISteuerung {
 	
 	private boolean gameOver = false;
 	private int level = 1;
+	private int time[] = new int[5];
+	
+	
 	
 	public Spielsteuerung(final Widget_GUI_Interface app) {
 		this.app = app;
@@ -167,6 +170,14 @@ public class Spielsteuerung implements ISteuerung {
 				@Override
 				public void update() {
 
+					time[0]++;
+					if(time[0] == 60){
+						time[1]++; 		//Nun 1. Sekunde
+						time[0]=0;
+//						app.pushToServer(String.valueOf(time[1]));
+						app.sendTime();
+					}
+					
 					checkCollision();
 
 					ball.setY(ball.getY() + y_direction);
@@ -209,7 +220,6 @@ public class Spielsteuerung implements ISteuerung {
 		else{
 			timer.cancel();
 			gameStarted = false;
-			requestRepaintGameObjects();
 		}
 		
 	}
@@ -229,6 +239,10 @@ public class Spielsteuerung implements ISteuerung {
 			
 		}
 		return bloecke.size();
+	}
+
+	public Integer getTime() {
+		return time[1];
 	}
 	
 	

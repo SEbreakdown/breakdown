@@ -21,7 +21,6 @@ public class Canvas extends AbstractComponent {
 
 	private boolean gameOver = false;
 	private int hitBlock = 15;
-	
 	private Spielverwaltung spielverwaltung;
 	
 	
@@ -86,11 +85,16 @@ public class Canvas extends AbstractComponent {
 			requestRepaint();
 		}
 		
+		if(variables.containsKey("time")) {
+			Integer zeit = (Integer) variables.get("time");
+			spielverwaltung.setZeit(zeit);
+		}
+		
+		
 		
 		if(variables.containsKey("hit_block")) {
 			spielverwaltung.erhoeheHighscoreUm(10);
 			this.hitBlock = (Integer) variables.get("hit_block");
-			System.out.println(hitBlock);
 			
 			if(hitBlock == 0){
 				//Spielende/Levelende
@@ -101,15 +105,7 @@ public class Canvas extends AbstractComponent {
 		}
 		
 		
-		if(variables.containsKey("click")) {
-
-			// When the user has clicked the component we increase the 
-			// click count, update the message and request a repaint so 
-			// the changes are sent back to the client.
-			clicks++;
-			message += "<br/>" + variables.get("click");
-			requestRepaint();
-		}
+		
 	}
 
 }
