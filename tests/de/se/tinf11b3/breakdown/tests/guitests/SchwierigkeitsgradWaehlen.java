@@ -29,31 +29,9 @@ public class SchwierigkeitsgradWaehlen {
 	
 	
 	private void omg() {
-		selenium.open("/Breakdown");				//Seite aufrufen
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");		//Warte bis SpielStartenButton geladen
-			try { if (selenium.isElementPresent("css=span.v-button-caption")) break; } catch (Exception e) {}
-			try {
-				Thread.sleep(1000);
-			}
-			catch(InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 
-		selenium.click("css=span.v-button-caption");		//Spiel Starten klicken
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");		//Warten bis Leicht geladen
-			try { if (selenium.isElementPresent("css=span.v-button-wrap")) break; } catch (Exception e) {}
-			try {
-				Thread.sleep(1000);
-			}
-			catch(InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 
 		for (int second = 0;; second++) {
 			if (second >= 60) fail("timeout");		//Warten bis MIttelbutton geladen
@@ -201,12 +179,21 @@ public class SchwierigkeitsgradWaehlen {
 	
 	@When("^I press “Spiel starten”$")
 	public void I_press_Spiel_starten() throws Throwable {
-		selenium.open("/Breakdown/");
+		selenium.open("/Breakdown");				//Seite aufrufen
 		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");		//SpielStarten present
-			try { if (selenium.isElementPresent("css=span.v-button-caption")) break; } catch (Exception e) {assertFalse(true);}
-			Thread.sleep(1000);
+			if (second >= 60) fail("timeout");		//Warte bis SpielStartenButton geladen
+			try { if (selenium.isElementPresent("css=span.v-button-caption")) break; } catch (Exception e) {}
+			try {
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
+
+		selenium.click("css=span.v-button-caption");		//Spiel Starten klicken
 		
 	}
 	
@@ -215,13 +202,17 @@ public class SchwierigkeitsgradWaehlen {
 
 	@Then("^I should see “Leicht”$")
 	public void I_should_see_Leicht() throws Throwable {
-		try{
-			selenium.click("css=span.v-button-wrap");	//Leicht
+		for (int second = 0;; second++) {
+			if (second >= 60) fail("timeout");		//Warten bis Leicht geladen
+			try { if (selenium.isElementPresent("css=span.v-button-wrap")) break; } catch (Exception e) {}
+			try {
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		catch(com.thoughtworks.selenium.SeleniumException e){
-			assertFalse(true);
-		}
-		
 	}
 
 	@Then("^I should see “Mittel”$")
