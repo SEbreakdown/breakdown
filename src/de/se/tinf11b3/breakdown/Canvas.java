@@ -20,7 +20,7 @@ public class Canvas extends AbstractComponent {
 	private int leben = 0;
 
 	private boolean gameOver = false;
-	private boolean hitBlock = false;
+	private int hitBlock = 15;
 	
 	private Spielverwaltung spielverwaltung;
 	
@@ -65,7 +65,6 @@ public class Canvas extends AbstractComponent {
 		super.changeVariables(source, variables);
 
 		// Variables set by the widget are returned in the "variables" map.
-//
 		if(variables.containsKey("debug")) {
 			System.out.println(variables.get("debug"));
 		}
@@ -82,12 +81,23 @@ public class Canvas extends AbstractComponent {
 		}
 		
 		if(variables.containsKey("gameover")) {
+			gameOver = true;
 			spielverwaltung.gameOver();
+			requestRepaint();
 		}
 		
 		
 		if(variables.containsKey("hit_block")) {
 			spielverwaltung.erhoeheHighscoreUm(10);
+			this.hitBlock = (Integer) variables.get("hit_block");
+			System.out.println(hitBlock);
+			
+			if(hitBlock == 0){
+				//Spielende/Levelende
+				gameOver = true;
+				requestRepaint();
+				spielverwaltung.gameOver();
+			}
 		}
 		
 		

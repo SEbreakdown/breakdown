@@ -27,5 +27,7 @@ public interface Widget_GUI_Interface {
 	public void gameOver();
 	
 	public void loadNextLevel();
+	
+	
 
 }

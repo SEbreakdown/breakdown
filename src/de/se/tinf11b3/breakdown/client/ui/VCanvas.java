@@ -80,8 +80,6 @@ public class VCanvas extends Composite implements Paintable, Field,
 	private ISteuerung steuerungsInterface = (ISteuerung) steuerung;
 
 	
-	private boolean lebenVerloren = false;
-	private boolean hitBlock = false;
 	
 	
 	/**
@@ -164,15 +162,15 @@ public class VCanvas extends Composite implements Paintable, Field,
 	
 	public void erniedrigeLeben() {
 		if(client != null){
-			client.updateVariable(id, "leben", lebenVerloren, true);
-			steuerungsInterface.lebenVerloren();
+			client.updateVariable(id, "leben", -1, true);
+			steuerungsInterface.resetBallToInitPosition();
 		}
 	}
 	
 	
 	public void blockGetroffen() {
 		if(client != null){
-			client.updateVariable(id, "hit_block", hitBlock, true);
+			client.updateVariable(id, "hit_block", steuerungsInterface.getAnzahlBloecke(), true);
 		}
 	}
 	

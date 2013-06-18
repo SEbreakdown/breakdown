@@ -16,8 +16,10 @@ public interface ISteuerung {
 
 	public void nextLevel();
 	
-	public void lebenVerloren();
+	public void resetBallToInitPosition();
 	
 	public void gameOver();
+	
+	public Integer getAnzahlBloecke();
 	
 }

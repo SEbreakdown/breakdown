@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseUpEvent;
-import com.vaadin.data.validator.RegexpValidator;
 
 import de.se.tinf11b3.breakdown.client.collision.Blockkollision;
-import de.se.tinf11b3.breakdown.client.collision.CollisionResult;
 import de.se.tinf11b3.breakdown.client.collision.Kollisionserkennung;
 import de.se.tinf11b3.breakdown.client.collision.Kollisionsseite;
 import de.se.tinf11b3.breakdown.client.gameobjects.Ball;
@@ -16,11 +14,8 @@ import de.se.tinf11b3.breakdown.client.gameobjects.Block;
 import de.se.tinf11b3.breakdown.client.gameobjects.Paddle;
 import de.se.tinf11b3.breakdown.client.ui.Widget_GUI_Interface;
 import gwt.g2d.client.graphics.KnownColor;
-import gwt.g2d.client.math.Circle;
-import gwt.g2d.client.math.Rectangle;
 import gwt.g2d.client.math.Vector2;
 import gwt.g2d.client.util.FpsTimer;
-import de.se.tinf11b3.breakdown.client.vector.*;
 
 public class Spielsteuerung implements ISteuerung {
 
@@ -191,7 +186,7 @@ public class Spielsteuerung implements ISteuerung {
 	}
 
 	
-	public void lebenVerloren(){
+	public void resetBallToInitPosition(){
 		timer.cancel();
 		gameStarted = false;
 		
@@ -217,6 +212,23 @@ public class Spielsteuerung implements ISteuerung {
 			requestRepaintGameObjects();
 		}
 		
+	}
+	
+	public Integer getAnzahlBloecke() {
+		if(bloecke.size() == 0){
+			
+			level++;
+			if(level == 2){
+				resetBallToInitPosition();
+				initLevel_2();
+			}
+			else{
+				gameOver = true;
+				resetBallToInitPosition();
+			}
+			
+		}
+		return bloecke.size();
 	}
 	
 	

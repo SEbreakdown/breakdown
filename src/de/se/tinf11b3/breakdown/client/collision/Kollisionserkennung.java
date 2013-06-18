@@ -41,10 +41,10 @@ public class Kollisionserkennung {
 				if(tmp.getHitcount() == 0){
 						bloecke.remove(tmp);
 						
-						if(bloecke.isEmpty()){
+//						if(bloecke.isEmpty()){
 //							app.loadNextLevel();
-							app.gameOver();
-						}
+//							app.gameOver();
+//						}
 						
 				}
 				else{
