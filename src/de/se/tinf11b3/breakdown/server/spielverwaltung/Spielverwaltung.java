@@ -66,7 +66,25 @@ public class Spielverwaltung {
 	public void gameOver() {
 		if(anzLeben != 0){
 			if(zeit == 0) zeit++;
-			Integer score = 500000 / zeit;
+			
+			Integer maxPts = 0;
+			
+			//Schwierigkeitsgradabhängig
+			switch(schwierigkeitsgrad) {
+				case LEICHT:
+					maxPts = 100000;
+					break;
+				case MITTEL:
+					maxPts = 300000;
+					break;
+				case SCHWER:
+					maxPts = 500000;
+					break;
+				default:
+					break;
+			}
+			
+			Integer score = maxPts / zeit;
 			erhoeheHighscoreUm(score);
 		}
 		mainWindow.setContent(new GameOver(this, highscore));
@@ -90,6 +108,8 @@ public class Spielverwaltung {
 	}
 
 	public void resetGame(Schwierigkeitsgrad schwierigkeitsgrad) {
+		this.schwierigkeitsgrad = schwierigkeitsgrad;
+		System.out.println(this.schwierigkeitsgrad);
 		anzLeben = 3;
 		highscore = 0;
 		showHighscore();
@@ -105,6 +125,7 @@ public class Spielverwaltung {
 
 	public void setSchwierigkeitsgrad(Schwierigkeitsgrad schwierigkeitsgrad) {
 		this.schwierigkeitsgrad = schwierigkeitsgrad;
+		System.out.println(this.schwierigkeitsgrad);
 	}
 
 	public void showHighscoreWindow() {

@@ -24,4 +24,6 @@ public interface ISteuerung {
 	
 	public Integer getTime();
 	
+	public void setSchwierigkeitsgrad(Integer value);
+	
 }

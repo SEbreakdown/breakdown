@@ -197,12 +197,16 @@ public class VCanvas extends Composite implements Paintable, Field,
 		}
 		
 		this.client = client;
-
 		id = uidl.getId();
+
+
+		//Schwierigkeit auf Client setzen
+		steuerungsInterface.setSchwierigkeitsgrad(uidl.getIntAttribute("schwierigkeit"));
+		
+		pushToServer("Schwierigkeitsgrad");
+		pushToServer(String.valueOf(uidl.getIntAttribute("schwierigkeit")));
 		
 		boolean gameover = uidl.getBooleanAttribute("gameover");
-		
-
 		if(gameover){
 			sendTime();
 			steuerungsInterface.gameOver();
